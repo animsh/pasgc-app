@@ -1,0 +1,219 @@
+1. Personal Information
+- Name: [text]
+- Enrollment Number: [number]
+- Sex: [M/F]
+- Age: [number]
+- Address: [text]
+- Family Size: [number]
+- Parental Cohabitation Status: [LE3/GT3]
+- Mother's Education (Medu): [0-4]
+- Father's Education (Fedu): [0-4]
+- Mother's Job (Mjob): [text]
+- Father's Job (Fjob): [text]
+
+2. School and Academic Information
+- Reason for Choosing School: [home/reputation/course/other]
+- Guardian: [mother/father/other]
+- Travel Time: [1-4]
+- Study Time: [1-4]
+- Number of Past Class Failures: [number]
+- School Support: [yes/no]
+- Family Support: [yes/no]
+- Extra Activities: [yes/no]
+- Nursery: [yes/no]
+- Higher Education: [yes/no]
+- Internet Access: [yes/no]
+- Family Relationship: [1-5]
+- Free Time: [1-5]
+- Going Out: [1-5]
+- Health Status: [1-5]
+- Absences: [number]
+- Mid Semester Marks: [number]
+- End Semester Marks: [number]
+- Attendance Rate: [number]
+- Class Participation: [1-5]
+- Motivation: [1-5]
+- Self-discipline: [1-5]
+- Teacher Quality: [1-5]
+- Time Management: [1-5]
+- Peer Influence: [1-5]
+- Parental Involvement: [1-5]
+- Teacher-Student Relationship: [1-5]
+- Stress Levels: [1-5]
+- Mental Health: [1-5]
+- Goal Setting: [1-5]
+- Learning Resources: [1-5]
+- Group Study: [1-5]
+- Time Spent on Homework: [number]
+- Subject Interest: [1-5]
+- Classroom Environment: [1-5]
+- Test Preparation: [1-5]
+- Time Spent on Extracurricular Activities: [number]
+- Workload: [1-5]
+- Degree: [text]
+- Subject: [text]
+- Subject Code: [text]
+- Semester: [number]
+
+Certainly, here are the descriptions for the numbered options:
+
+1. Travel Time:
+   - 1: <15 min
+   - 2: 15-30 min
+   - 3: 30-60 min
+   - 4: >60 min
+
+2. Study Time:
+   - 1: <2 hours
+   - 2: 2-5 hours
+   - 3: 5-10 hours
+   - 4: >10 hours
+
+3. Family Relationship (1-5):
+   - 1: very bad
+   - 2: bad
+   - 3: neutral
+   - 4: good
+   - 5: very good
+
+4. Free Time (1-5):
+   - 1: very low
+   - 2: low
+   - 3: average
+   - 4: high
+   - 5: very high
+
+5. Going Out (1-5):
+   - 1: very rarely
+   - 2: rarely
+   - 3: occasionally
+   - 4: frequently
+   - 5: very frequently
+
+6. Health Status (1-5):
+   - 1: very bad
+   - 2: bad
+   - 3: fair
+   - 4: good
+   - 5: excellent
+
+7. Class Participation (1-5):
+   - 1: very low
+   - 2: low
+   - 3: average
+   - 4: high
+   - 5: very high
+
+8. Motivation (1-5):
+   - 1: very low
+   - 2: low
+   - 3: average
+   - 4: high
+   - 5: very high
+
+9. Self-discipline (1-5):
+   - 1: very low
+   - 2: low
+   - 3: average
+   - 4: high
+   - 5: very high
+
+10. Teacher Quality (1-5):
+   - 1: very poor
+   - 2: poor
+   - 3: average
+   - 4: good
+   - 5: excellent
+
+11. Time Management (1-5):
+   - 1: very poor
+   - 2: poor
+   - 3: average
+   - 4: good
+   - 5: excellent
+
+12. Peer Influence (1-5):
+   - 1: very negative
+   - 2: negative
+   - 3: neutral
+   - 4: positive
+   - 5: very positive
+
+13. Parental Involvement (1-5):
+   - 1: very low
+   - 2: low
+   - 3: average
+   - 4: high
+   - 5: very high
+
+14. Teacher-Student Relationship (1-5):
+   - 1: very poor
+   - 2: poor
+   - 3: average
+   - 4: good
+   - 5: excellent
+
+15. Stress Levels (1-5):
+   - 1: very low
+   - 2: low
+   - 3: moderate
+   - 4: high
+   - 5: very high
+
+16. Mental Health (1-5):
+   - 1: very poor
+   - 2: poor
+   - 3: average
+   - 4: good
+   - 5: excellent
+
+17. Goal Setting (1-5):
+   - 1: very poor
+   - 2: poor
+   - 3: average
+   - 4: good
+   - 5: excellent
+
+18. Learning Resources (1-5):
+   - 1: very insufficient
+   - 2: insufficient
+   - 3: adequate
+   - 4: good
+   - 5: excellent
+
+19. Group Study (1-5):
+   - 1: never
+   - 2: rarely
+   - 3: sometimes
+   - 4: often
+   - 5: always
+
+20. Subject Interest (1-5):
+   - 1: very low
+   - 2: low
+   - 3: average
+   - 4: high
+   - 5: very high
+
+21. Classroom Environment (1-5):
+   - 1: very poor
+   - 2: poor
+   - 3: average
+   - 4: good
+   - 5: excellent
+
+22. Test Preparation (1-5):
+   - 1: very poor
+   - 2: poor
+   - 3: average
+   - 4: good
+   - 5: excellent
+
+23. Workload (1-5):
+   -1: very light
+   - 2: light
+   - 3: manageable
+   - 4: heavy
+   - 5: very heavy
+
+Please note that these descriptions are just guidelines to help you understand the scale of each numbered option. Feel free to modify or expand them according to your specific needs.

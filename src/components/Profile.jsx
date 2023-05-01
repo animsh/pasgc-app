@@ -14,6 +14,8 @@ import { Container, CssBaseline } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-scroll";
 import { scroller } from "react-scroll";
+import { Tabs, Tab } from "@mui/material";
+import Slider from "@mui/material/Slider";
 
 const theme = createTheme({
   typography: {
@@ -26,6 +28,22 @@ const theme = createTheme({
     },
   },
 });
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  );
+}
 
 const Profile = () => {
   const [name, setName] = useState("");
@@ -680,6 +698,42 @@ const Profile = () => {
     validateTravelTime();
     validateStudyTime();
     validateFailure();
+    validateSchoolSupport();
+    validateFamilySupport();
+    validateExtraActivities();
+    validateNurserySchool();
+    validateHigherEducation();
+    validateInternetAccess();
+    validateFamilyRelationship();
+    validateFreeTime();
+    validateGoingOut();
+    validateHealth();
+    validateAbsences();
+    validateMidSemesterMarks();
+    validateAttendaceRate();
+    validateClassParticipation();
+    validateMotivation();
+    validateSelfDiscipline();
+    validateTeacherQuality();
+    validateTimeManagement();
+    validatePeerInfluence();
+    validateParentalInvolvement();
+    validateTeacherStudentRelationship();
+    validateStressLevel();
+    validateMentalHealth();
+    validateGoalSetting();
+    validateLearningReasources();
+    validateGroupStudy();
+    validateTimeSpentOnHomework();
+    validateSubjectInterest();
+    validateClassroomEnvironment();
+    validateTestPreparation();
+    validateTimeSpentOnExtraCurricularActivities();
+    validateWorkload();
+    validateDegree();
+    validateSubject();
+    validateSubjectCode();
+    validateSemester();
   };
 
   const styles = {
@@ -706,6 +760,12 @@ const Profile = () => {
     });
   };
 
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container
@@ -719,1505 +779,1852 @@ const Profile = () => {
         }}
       >
         <CssBaseline />
-        <Box
-          position="fixed"
-          top="80px" /* Replace with the height of your Navbar */
-          bgcolor="#000"
-          color="white"
-          width="100%"
-          textAlign="center"
-          zIndex={1000}
-        >
-          <Stack
-            direction="row"
-            spacing={1}
-            sx={{ my: 2 }}
-            justifyContent="center"
+        <Box>
+          <Box
+            position="fixed"
+            top="80px" /* Replace with the height of your Navbar */
+            color="white"
+            width="1100px"
+            margin="auto"
+            zIndex={1000}
+            sx={{ maxWidth: "100%", px: 2 }}
           >
-            {chipData.map((chip) => (
-              <Chip
-                key={chip.id}
-                label={chip.label}
-                style={styles.chip}
-                onClick={() => handleChipClick(chip.id, chip.target)}
-                color={selectedChipId === chip.id ? "primary" : "default"}
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              centered
+              sx={{ bgcolor: "background.paper" }}
+            >
+              <Tab label="Data for Marks Analysis" />
+              <Tab label="Data for Career Analysis" />
+            </Tabs>
+          </Box>
+          <TabPanel value={value} index={0}>
+            {/* Content for Marks Analysis tab */}
+            <Box
+              position="fixed"
+              top="130px" /* Replace with the height of your Navbar */
+              color="white"
+              textAlign="center"
+              width="1100px"
+              margin="auto"
+              zIndex={1000}
+              sx={{ maxWidth: "100%", px: 2 }}
+            >
+              <Stack
+                direction="row"
+                spacing={1}
+                sx={{ my: 2 }}
+                justifyContent="center"
+              >
+                {chipData.map((chip) => (
+                  <Chip
+                    key={chip.id}
+                    label={chip.label}
+                    style={styles.chip}
+                    onClick={() => handleChipClick(chip.id, chip.target)}
+                    color={selectedChipId === chip.id ? "primary" : "default"}
+                  />
+                ))}
+              </Stack>
+            </Box>
+            <div
+              id="personal"
+              style={{
+                width: "100%",
+                marginTop: "60px",
+                padding: "24px 24px",
+                maxWidth: "1100px",
+              }}
+            >
+              <Typography variant="h5" align="center" color="textPrimary">
+                Personal Details
+              </Typography>
+              <TextField
+                label="Name"
+                value={name}
+                onChange={handleNameChange}
+                error={nameError} //To display error state for invalid input
+                helperText={nameError && "Please enter a valid Name"} //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
               />
-            ))}
-          </Stack>
+
+              <TextField
+                label="Enrollment Number"
+                value={enrollmentNumber}
+                onChange={handleEnrollmentNumberChange}
+                error={enrollmentNumberError} //To display error state for invalid input
+                helperText={
+                  enrollmentNumberError && "Please enter a enrollment number"
+                } //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="number"
+              />
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">Gender/Sex:</FormLabel>
+                <RadioGroup row value={sex} onChange={handleSexChange}>
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio color="primary" />}
+                    label="Male"
+                  />
+                  <FormControlLabel
+                    value="female"
+                    control={<Radio color="primary" />}
+                    label="Female"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <TextField
+                label="Age"
+                value={age}
+                onChange={handleAgeChange}
+                error={ageError} //To display error state for invalid input
+                helperText={
+                  ageError && "Please enter valid age. range: 18 - 26"
+                } //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="number"
+              />
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">Family Size:</FormLabel>
+                <RadioGroup
+                  row
+                  value={familySize}
+                  onChange={handleFamilySizeChange}
+                >
+                  <FormControlLabel
+                    value="LE3"
+                    control={<Radio color="primary" />}
+                    label="Less than or equal to 3"
+                  />
+                  <FormControlLabel
+                    value="GT3"
+                    control={<Radio color="primary" />}
+                    label="Greater than 3"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Parent's Cohabitation Status:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={parentsCohabitation}
+                  onChange={handleParentsCohabitationChange}
+                >
+                  <FormControlLabel
+                    value="T"
+                    control={<Radio color="primary" />}
+                    label="Together"
+                  />
+                  <FormControlLabel
+                    value="A"
+                    control={<Radio color="primary" />}
+                    label="Apart"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Mother's Education Level:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={mothersEducation}
+                  onChange={handleMothersEducationChange}
+                >
+                  <FormControlLabel
+                    value="0"
+                    control={<Radio color="primary" />}
+                    label="None"
+                  />
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Primary Education (4th grade)"
+                  />
+
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="5th to 9th grade"
+                  />
+
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Secondary Education"
+                  />
+
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Higher Education"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Father's Education Level:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={fathersEducation}
+                  onChange={handleFathersEducationChange}
+                >
+                  <FormControlLabel
+                    value="0"
+                    control={<Radio color="primary" />}
+                    label="None"
+                  />
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Primary Education (4th grade)"
+                  />
+
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="5th to 9th grade"
+                  />
+
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Secondary Education"
+                  />
+
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Higher Education"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">Mother's Job:</FormLabel>
+                <RadioGroup
+                  row
+                  value={mothersJob}
+                  onChange={handleMothersJobChange}
+                >
+                  <FormControlLabel
+                    value="teacher"
+                    control={<Radio color="primary" />}
+                    label="Teacher"
+                  />
+                  <FormControlLabel
+                    value="health"
+                    control={<Radio color="primary" />}
+                    label="Health care related"
+                  />
+
+                  <FormControlLabel
+                    value="services"
+                    control={<Radio color="primary" />}
+                    label="Civil services (e.g. administrative or police)"
+                  />
+
+                  <FormControlLabel
+                    value="at_home"
+                    control={<Radio color="primary" />}
+                    label="At Home"
+                  />
+
+                  <FormControlLabel
+                    value="other"
+                    control={<Radio color="primary" />}
+                    label="Other"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">Father's Job:</FormLabel>
+                <RadioGroup
+                  row
+                  value={fathersJob}
+                  onChange={handleFathersJobChange}
+                >
+                  <FormControlLabel
+                    value="teacher"
+                    control={<Radio color="primary" />}
+                    label="Teacher"
+                  />
+                  <FormControlLabel
+                    value="health"
+                    control={<Radio color="primary" />}
+                    label="Health care related"
+                  />
+
+                  <FormControlLabel
+                    value="services"
+                    control={<Radio color="primary" />}
+                    label="Civil services (e.g. administrative or police)"
+                  />
+
+                  <FormControlLabel
+                    value="at_home"
+                    control={<Radio color="primary" />}
+                    label="At Home"
+                  />
+
+                  <FormControlLabel
+                    value="other"
+                    control={<Radio color="primary" />}
+                    label="Other"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
+
+            <div
+              id="academics"
+              style={{
+                width: "100%",
+                padding: "24px 24px",
+                maxWidth: "1100px",
+              }}
+            >
+              <Typography variant="h5" align="center" color="textPrimary">
+                School and Academics Details
+              </Typography>
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Reason to choose school/college:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={reasonToJoinCollege}
+                  onChange={handleReasonToJoinCollegeChange}
+                >
+                  <FormControlLabel
+                    value="home"
+                    control={<Radio color="primary" />}
+                    label="Close to home"
+                  />
+                  <FormControlLabel
+                    value="reputation"
+                    control={<Radio color="primary" />}
+                    label="College/School reputation"
+                  />
+
+                  <FormControlLabel
+                    value="course"
+                    control={<Radio color="primary" />}
+                    label="Course"
+                  />
+
+                  <FormControlLabel
+                    value="other"
+                    control={<Radio color="primary" />}
+                    label="Other"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">Guardian:</FormLabel>
+                <RadioGroup
+                  row
+                  value={guardian}
+                  onChange={handleGuardianChange}
+                >
+                  <FormControlLabel
+                    value="mother"
+                    control={<Radio color="primary" />}
+                    label="Mother"
+                  />
+                  <FormControlLabel
+                    value="father"
+                    control={<Radio color="primary" />}
+                    label="Father"
+                  />
+
+                  <FormControlLabel
+                    value="other"
+                    control={<Radio color="primary" />}
+                    label="Other"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Home to college travel time:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={travelTime}
+                  onChange={handleTravelTimeChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="< 15 min"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="15 to 30 min"
+                  />
+
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="30 min to 1 hour"
+                  />
+
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="> 1 hour"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Weekly study time outside school/college:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={studyTime}
+                  onChange={handleStudyTimeChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="< 2 hours"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="2 to 5 hours"
+                  />
+
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="5 to 10 hours"
+                  />
+
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="> 10 hour"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <TextField
+                label="Past class failures"
+                value={failures}
+                onChange={handleFailureChange}
+                error={failuresError} //To display error state for invalid input
+                helperText={failuresError && "Please enter a failure number"} //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="number"
+              />
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Do you have school/college support:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={schoolSupport}
+                  onChange={handleSchoolSupporChange}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio color="primary" />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value="no"
+                    control={<Radio color="primary" />}
+                    label="No"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Do you hvae family support:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={familySupport}
+                  onChange={handleFamilySupportChange}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio color="primary" />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value="no"
+                    control={<Radio color="primary" />}
+                    label="No"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Do you do any extra activity:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={extraActivities}
+                  onChange={handleExtraActivitiesChange}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio color="primary" />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value="no"
+                    control={<Radio color="primary" />}
+                    label="No"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">Have you done nursery:</FormLabel>
+                <RadioGroup row value={nursery} onChange={handleNurseryChange}>
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio color="primary" />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value="no"
+                    control={<Radio color="primary" />}
+                    label="No"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Do you want to pursue higher education:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={higherEducation}
+                  onChange={handleHigherEducationChange}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio color="primary" />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value="no"
+                    control={<Radio color="primary" />}
+                    label="No"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Do you have access to the internet:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={internetAccess}
+                  onChange={handleInternetAccessChange}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio color="primary" />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    value="no"
+                    control={<Radio color="primary" />}
+                    label="No"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe your relationship with your family:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={familyRelationship}
+                  onChange={handleFamilyRelationshipChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Bad"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Bad"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Neutral"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Good"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Very Good"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How much free time do you have after school:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={freeTime}
+                  onChange={handleFreeTimeChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Low"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Low"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="High"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Very High"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How much you go out with your friends:
+                </FormLabel>
+                <RadioGroup row value={goOut} onChange={handleGoOutChange}>
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Rarely"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Rarely"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Occasionally"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Freuently"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Very Freuently"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe your health status:
+                </FormLabel>
+                <RadioGroup row value={health} onChange={handleHealthChange}>
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Bad"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Bad"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Fair"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Good"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Excellent"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe your class participation in school:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={classParticipation}
+                  onChange={handleClassParticipationChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Low"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Low"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="High"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Very High"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How much motivated are you to study:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={motivation}
+                  onChange={handleMotivationChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Low"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Low"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="High"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Very High"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How much self-discipline do you have:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={selfDiscipline}
+                  onChange={handleSelfDisciplineChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Low"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Low"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="High"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Very High"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe the quality of teacher in your school:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={teacherQuality}
+                  onChange={handleTeacherQualityChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Poor"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Poor"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Good"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Excellent"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe your time management skills:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={timeManagement}
+                  onChange={handleTimeManagementChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Poor"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Poor"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Good"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Excellent"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How much you feel influenced by your peers in your studies:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={peerInfluence}
+                  onChange={handlePeerInfluenceChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Negative"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Negative"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Neutral"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Positive"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Very Positive"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe involvemnt of your parents in your
+                  studies:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={timeManagement}
+                  onChange={handleTimeManagementChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Low"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Low"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="High"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Very High"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe teacher relation with students in your
+                  school:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={teacherStudentRelationship}
+                  onChange={handleTeacherStudentRelationshipChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Poor"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Poor"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Good"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Excellent"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe your stress level during studies:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={stressLevel}
+                  onChange={handleStressLevelChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Low"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Low"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Moderate"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="High"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Very High"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe your mental health during studies:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={mentalHealth}
+                  onChange={handleMentalHealthChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Poor"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Poor"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Good"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Excellent"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe your goal setting during studies:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={goalsSetting}
+                  onChange={handleGoalsSettingChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Low"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Low"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Good"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Excellent"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How much learning resources are available to you:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={learningResources}
+                  onChange={handleLearningResourcesChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Insufficient"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Insufficient"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Adequate"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Good"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Excellent"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How often do you go for group studies:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={groupStudy}
+                  onChange={handleGroupStudyChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Never"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Rarely"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Sometimes"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Often"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Always"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe your interest in subjects:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={subjectInterest}
+                  onChange={handleSubjectInterestChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Low"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Low"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="High"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Very High"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe classroom environment:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={classroomEnvironment}
+                  onChange={handleClassroomEnvironmentChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Low"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Low"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Good"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Excellent"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe your preparation for exams:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={testPreparation}
+                  onChange={handleTestPreparationChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Poor"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Poor"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Average"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Good"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Excellent"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  How would you describe workload of your course:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={workload}
+                  onChange={handleWorkloadChange}
+                >
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Very Light"
+                  />
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="Light"
+                  />
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Manageable"
+                  />
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Heavy"
+                  />
+                  <FormControlLabel
+                    value="5"
+                    control={<Radio color="primary" />}
+                    label="Very Heavy"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <TextField
+                label="Attendance Rate (%)"
+                value={attendanceRate}
+                onChange={handleAttendanceRateChange}
+                error={failuresError} //To display error state for invalid input
+                helperText={failuresError && "Please enter a failure number"} //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="number"
+              />
+
+              <TextField
+                label="Time spent on study (hours/week)"
+                value={timeSpentOnHomework}
+                onChange={handleTimeSpentOnHomeworkChange}
+                error={failuresError} //To display error state for invalid input
+                helperText={
+                  failuresError && "Please enter time spent on homework"
+                } //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="number"
+              />
+
+              <TextField
+                label="Time spent on extra curricular activity (hours/week)"
+                value={timeSpentOnExtraActivities}
+                onChange={handleTimeSpentOnExtraActivitiesChange}
+                error={failuresError} //To display error state for invalid input
+                helperText={
+                  failuresError &&
+                  "Please enter time spent on extra curricular activity"
+                } //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="number"
+              />
+            </div>
+
+            <div
+              id="course"
+              style={{
+                width: "100%",
+                padding: "24px 24px",
+                maxWidth: "1100px",
+              }}
+            >
+              <Typography variant="h5" align="center" color="textPrimary">
+                Course Information
+              </Typography>
+              <TextField
+                label="Degree (short form)"
+                value={degree}
+                onChange={handleDegreeChange}
+                error={failuresError} //To display error state for invalid input
+                helperText={failuresError && "Please enter a degree"} //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="text"
+              />
+
+              <TextField
+                label="Semester Number"
+                value={semester}
+                onChange={handleSemesterChange}
+                error={failuresError} //To display error state for invalid input
+                helperText={failuresError && "Please enter semester"} //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="number"
+              />
+
+              <TextField
+                label="Subjects of this semester seprated with coma ','"
+                value={subject}
+                onChange={handleSubjectChange}
+                error={failuresError} //To display error state for invalid input
+                helperText={failuresError && "Please enter subjects"} //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="text"
+              />
+
+              <TextField
+                label="Subjects Code of this semester seprated with coma ','"
+                value={subjectCode}
+                onChange={handleSubjectCodeChange}
+                error={failuresError} //To display error state for invalid input
+                helperText={failuresError && "Please enter subjects code"} //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="text"
+              />
+
+              <TextField
+                label="Mid Semester Marks of each subject seprated with coma ',' (out of 30)"
+                value={midSemMarks}
+                onChange={handleMidSemMarksChange}
+                error={failuresError} //To display error state for invalid input
+                helperText={
+                  failuresError && "Please enter a mid semester marks"
+                } //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="number"
+              />
+
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={(event) => {
+                  handleSubmit(event);
+                }}
+                style={{ marginTop: "24px", width: "100%" }}
+              >
+                Save
+              </Button>
+            </div>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            {/* Content for Marks Analysis tab */}
+
+            <div
+              id="personal"
+              style={{
+                width: "100%",
+                marginTop: "60px",
+                padding: "24px 24px",
+                maxWidth: "1100px",
+              }}
+            >
+              <Typography variant="h5" align="center" color="textPrimary">
+                Personal Details
+              </Typography>
+
+              <Slider
+                aria-label="Temperature"
+                defaultValue={30}
+                // getAriaValueText={valuetext}
+                valueLabelDisplay="auto"
+                step={10}
+                marks
+                min={10}
+                max={110}
+              />
+              <TextField
+                label="Name"
+                value={name}
+                onChange={handleNameChange}
+                error={nameError} //To display error state for invalid input
+                helperText={nameError && "Please enter a valid Name"} //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+              />
+
+              <TextField
+                label="Enrollment Number"
+                value={enrollmentNumber}
+                onChange={handleEnrollmentNumberChange}
+                error={enrollmentNumberError} //To display error state for invalid input
+                helperText={
+                  enrollmentNumberError && "Please enter a enrollment number"
+                } //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="number"
+              />
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">Gender/Sex:</FormLabel>
+                <RadioGroup row value={sex} onChange={handleSexChange}>
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio color="primary" />}
+                    label="Male"
+                  />
+                  <FormControlLabel
+                    value="female"
+                    control={<Radio color="primary" />}
+                    label="Female"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <TextField
+                label="Age"
+                value={age}
+                onChange={handleAgeChange}
+                error={ageError} //To display error state for invalid input
+                helperText={
+                  ageError && "Please enter valid age. range: 18 - 26"
+                } //helper text to show when there's an error.
+                fullWidth
+                margin="normal"
+                FormHelperTextProps={{
+                  sx: {
+                    position: "absolute",
+                    top: "100%",
+                  },
+                }}
+                type="number"
+              />
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">Family Size:</FormLabel>
+                <RadioGroup
+                  row
+                  value={familySize}
+                  onChange={handleFamilySizeChange}
+                >
+                  <FormControlLabel
+                    value="LE3"
+                    control={<Radio color="primary" />}
+                    label="Less than or equal to 3"
+                  />
+                  <FormControlLabel
+                    value="GT3"
+                    control={<Radio color="primary" />}
+                    label="Greater than 3"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Parent's Cohabitation Status:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={parentsCohabitation}
+                  onChange={handleParentsCohabitationChange}
+                >
+                  <FormControlLabel
+                    value="T"
+                    control={<Radio color="primary" />}
+                    label="Together"
+                  />
+                  <FormControlLabel
+                    value="A"
+                    control={<Radio color="primary" />}
+                    label="Apart"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Mother's Education Level:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={mothersEducation}
+                  onChange={handleMothersEducationChange}
+                >
+                  <FormControlLabel
+                    value="0"
+                    control={<Radio color="primary" />}
+                    label="None"
+                  />
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Primary Education (4th grade)"
+                  />
+
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="5th to 9th grade"
+                  />
+
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Secondary Education"
+                  />
+
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Higher Education"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">
+                  Father's Education Level:
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={fathersEducation}
+                  onChange={handleFathersEducationChange}
+                >
+                  <FormControlLabel
+                    value="0"
+                    control={<Radio color="primary" />}
+                    label="None"
+                  />
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio color="primary" />}
+                    label="Primary Education (4th grade)"
+                  />
+
+                  <FormControlLabel
+                    value="2"
+                    control={<Radio color="primary" />}
+                    label="5th to 9th grade"
+                  />
+
+                  <FormControlLabel
+                    value="3"
+                    control={<Radio color="primary" />}
+                    label="Secondary Education"
+                  />
+
+                  <FormControlLabel
+                    value="4"
+                    control={<Radio color="primary" />}
+                    label="Higher Education"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">Mother's Job:</FormLabel>
+                <RadioGroup
+                  row
+                  value={mothersJob}
+                  onChange={handleMothersJobChange}
+                >
+                  <FormControlLabel
+                    value="teacher"
+                    control={<Radio color="primary" />}
+                    label="Teacher"
+                  />
+                  <FormControlLabel
+                    value="health"
+                    control={<Radio color="primary" />}
+                    label="Health care related"
+                  />
+
+                  <FormControlLabel
+                    value="services"
+                    control={<Radio color="primary" />}
+                    label="Civil services (e.g. administrative or police)"
+                  />
+
+                  <FormControlLabel
+                    value="at_home"
+                    control={<Radio color="primary" />}
+                    label="At Home"
+                  />
+
+                  <FormControlLabel
+                    value="other"
+                    control={<Radio color="primary" />}
+                    label="Other"
+                  />
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl component="fieldset" fullWidth margin="normal">
+                <FormLabel component="legend">Father's Job:</FormLabel>
+                <RadioGroup
+                  row
+                  value={fathersJob}
+                  onChange={handleFathersJobChange}
+                >
+                  <FormControlLabel
+                    value="teacher"
+                    control={<Radio color="primary" />}
+                    label="Teacher"
+                  />
+                  <FormControlLabel
+                    value="health"
+                    control={<Radio color="primary" />}
+                    label="Health care related"
+                  />
+
+                  <FormControlLabel
+                    value="services"
+                    control={<Radio color="primary" />}
+                    label="Civil services (e.g. administrative or police)"
+                  />
+
+                  <FormControlLabel
+                    value="at_home"
+                    control={<Radio color="primary" />}
+                    label="At Home"
+                  />
+
+                  <FormControlLabel
+                    value="other"
+                    control={<Radio color="primary" />}
+                    label="Other"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
+          </TabPanel>
         </Box>
-        <div
-          id="personal"
-          style={{
-            width: "100%",
-            marginTop: "60px",
-            padding: "24px 24px",
-            maxWidth: "1100px",
-          }}
-        >
-          <Typography variant="h5" align="center" color="textPrimary">
-            Personal Details
-          </Typography>
-          <TextField
-            label="Name"
-            value={name}
-            onChange={handleNameChange}
-            error={nameError} //To display error state for invalid input
-            helperText={nameError && "Please enter a valid Name"} //helper text to show when there's an error.
-            fullWidth
-            margin="normal"
-            FormHelperTextProps={{
-              sx: {
-                position: "absolute",
-                top: "100%",
-              },
-            }}
-          />
-
-          <TextField
-            label="Enrollment Number"
-            value={enrollmentNumber}
-            onChange={handleEnrollmentNumberChange}
-            error={enrollmentNumberError} //To display error state for invalid input
-            helperText={
-              enrollmentNumberError && "Please enter a enrollment number"
-            } //helper text to show when there's an error.
-            fullWidth
-            margin="normal"
-            FormHelperTextProps={{
-              sx: {
-                position: "absolute",
-                top: "100%",
-              },
-            }}
-            type="number"
-          />
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">Gender/Sex:</FormLabel>
-            <RadioGroup row value={sex} onChange={handleSexChange}>
-              <FormControlLabel
-                value="male"
-                control={<Radio color="primary" />}
-                label="Male"
-              />
-              <FormControlLabel
-                value="female"
-                control={<Radio color="primary" />}
-                label="Female"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <TextField
-            label="Age"
-            value={age}
-            onChange={handleAgeChange}
-            error={ageError} //To display error state for invalid input
-            helperText={ageError && "Please enter valid age. range: 18 - 26"} //helper text to show when there's an error.
-            fullWidth
-            margin="normal"
-            FormHelperTextProps={{
-              sx: {
-                position: "absolute",
-                top: "100%",
-              },
-            }}
-            type="number"
-          />
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">Family Size:</FormLabel>
-            <RadioGroup
-              row
-              value={familySize}
-              onChange={handleFamilySizeChange}
-            >
-              <FormControlLabel
-                value="LE3"
-                control={<Radio color="primary" />}
-                label="Less than or equal to 3"
-              />
-              <FormControlLabel
-                value="GT3"
-                control={<Radio color="primary" />}
-                label="Greater than 3"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              Parent's Cohabitation Status:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={parentsCohabitation}
-              onChange={handleParentsCohabitationChange}
-            >
-              <FormControlLabel
-                value="T"
-                control={<Radio color="primary" />}
-                label="Together"
-              />
-              <FormControlLabel
-                value="A"
-                control={<Radio color="primary" />}
-                label="Apart"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">Mother's Education Level:</FormLabel>
-            <RadioGroup
-              row
-              value={mothersEducation}
-              onChange={handleMothersEducationChange}
-            >
-              <FormControlLabel
-                value="0"
-                control={<Radio color="primary" />}
-                label="None"
-              />
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Primary Education (4th grade)"
-              />
-
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="5th to 9th grade"
-              />
-
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Secondary Education"
-              />
-
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Higher Education"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">Father's Education Level:</FormLabel>
-            <RadioGroup
-              row
-              value={fathersEducation}
-              onChange={handleFathersEducationChange}
-            >
-              <FormControlLabel
-                value="0"
-                control={<Radio color="primary" />}
-                label="None"
-              />
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Primary Education (4th grade)"
-              />
-
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="5th to 9th grade"
-              />
-
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Secondary Education"
-              />
-
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Higher Education"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">Mother's Job:</FormLabel>
-            <RadioGroup
-              row
-              value={mothersJob}
-              onChange={handleMothersJobChange}
-            >
-              <FormControlLabel
-                value="teacher"
-                control={<Radio color="primary" />}
-                label="Teacher"
-              />
-              <FormControlLabel
-                value="health"
-                control={<Radio color="primary" />}
-                label="Health care related"
-              />
-
-              <FormControlLabel
-                value="services"
-                control={<Radio color="primary" />}
-                label="Civil services (e.g. administrative or police)"
-              />
-
-              <FormControlLabel
-                value="at_home"
-                control={<Radio color="primary" />}
-                label="At Home"
-              />
-
-              <FormControlLabel
-                value="other"
-                control={<Radio color="primary" />}
-                label="Other"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">Father's Job:</FormLabel>
-            <RadioGroup
-              row
-              value={fathersJob}
-              onChange={handleFathersJobChange}
-            >
-              <FormControlLabel
-                value="teacher"
-                control={<Radio color="primary" />}
-                label="Teacher"
-              />
-              <FormControlLabel
-                value="health"
-                control={<Radio color="primary" />}
-                label="Health care related"
-              />
-
-              <FormControlLabel
-                value="services"
-                control={<Radio color="primary" />}
-                label="Civil services (e.g. administrative or police)"
-              />
-
-              <FormControlLabel
-                value="at_home"
-                control={<Radio color="primary" />}
-                label="At Home"
-              />
-
-              <FormControlLabel
-                value="other"
-                control={<Radio color="primary" />}
-                label="Other"
-              />
-            </RadioGroup>
-          </FormControl>
-        </div>
-
-        <div
-          id="academics"
-          style={{
-            width: "100%",
-            padding: "24px 24px",
-            maxWidth: "1100px",
-          }}
-        >
-          <Typography variant="h5" align="center" color="textPrimary">
-            School and Academics Details
-          </Typography>
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              Reason to choose school/college:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={reasonToJoinCollege}
-              onChange={handleReasonToJoinCollegeChange}
-            >
-              <FormControlLabel
-                value="home"
-                control={<Radio color="primary" />}
-                label="Close to home"
-              />
-              <FormControlLabel
-                value="reputation"
-                control={<Radio color="primary" />}
-                label="College/School reputation"
-              />
-
-              <FormControlLabel
-                value="course"
-                control={<Radio color="primary" />}
-                label="Course"
-              />
-
-              <FormControlLabel
-                value="other"
-                control={<Radio color="primary" />}
-                label="Other"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">Guardian:</FormLabel>
-            <RadioGroup row value={guardian} onChange={handleGuardianChange}>
-              <FormControlLabel
-                value="mother"
-                control={<Radio color="primary" />}
-                label="Mother"
-              />
-              <FormControlLabel
-                value="father"
-                control={<Radio color="primary" />}
-                label="Father"
-              />
-
-              <FormControlLabel
-                value="other"
-                control={<Radio color="primary" />}
-                label="Other"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              Home to college travel time:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={travelTime}
-              onChange={handleTravelTimeChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="< 15 min"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="15 to 30 min"
-              />
-
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="30 min to 1 hour"
-              />
-
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="> 1 hour"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              Weekly study time outside school/college:
-            </FormLabel>
-            <RadioGroup row value={studyTime} onChange={handleStudyTimeChange}>
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="< 2 hours"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="2 to 5 hours"
-              />
-
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="5 to 10 hours"
-              />
-
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="> 10 hour"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <TextField
-            label="Past class failures"
-            value={failures}
-            onChange={handleFailureChange}
-            error={failuresError} //To display error state for invalid input
-            helperText={failuresError && "Please enter a failure number"} //helper text to show when there's an error.
-            fullWidth
-            margin="normal"
-            FormHelperTextProps={{
-              sx: {
-                position: "absolute",
-                top: "100%",
-              },
-            }}
-            type="number"
-          />
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              Do you have school/college support:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={schoolSupport}
-              onChange={handleSchoolSupporChange}
-            >
-              <FormControlLabel
-                value="yes"
-                control={<Radio color="primary" />}
-                label="Yes"
-              />
-              <FormControlLabel
-                value="no"
-                control={<Radio color="primary" />}
-                label="No"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              Do you hvae family support:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={familySupport}
-              onChange={handleFamilySupportChange}
-            >
-              <FormControlLabel
-                value="yes"
-                control={<Radio color="primary" />}
-                label="Yes"
-              />
-              <FormControlLabel
-                value="no"
-                control={<Radio color="primary" />}
-                label="No"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              Do you do any extra activity:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={extraActivities}
-              onChange={handleExtraActivitiesChange}
-            >
-              <FormControlLabel
-                value="yes"
-                control={<Radio color="primary" />}
-                label="Yes"
-              />
-              <FormControlLabel
-                value="no"
-                control={<Radio color="primary" />}
-                label="No"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">Have you done nursery:</FormLabel>
-            <RadioGroup row value={nursery} onChange={handleNurseryChange}>
-              <FormControlLabel
-                value="yes"
-                control={<Radio color="primary" />}
-                label="Yes"
-              />
-              <FormControlLabel
-                value="no"
-                control={<Radio color="primary" />}
-                label="No"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              Do you want to pursue higher education:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={higherEducation}
-              onChange={handleHigherEducationChange}
-            >
-              <FormControlLabel
-                value="yes"
-                control={<Radio color="primary" />}
-                label="Yes"
-              />
-              <FormControlLabel
-                value="no"
-                control={<Radio color="primary" />}
-                label="No"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              Do you have access to the internet:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={internetAccess}
-              onChange={handleInternetAccessChange}
-            >
-              <FormControlLabel
-                value="yes"
-                control={<Radio color="primary" />}
-                label="Yes"
-              />
-              <FormControlLabel
-                value="no"
-                control={<Radio color="primary" />}
-                label="No"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe your relationship with your family:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={familyRelationship}
-              onChange={handleFamilyRelationshipChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Bad"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Bad"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Neutral"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Good"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Very Good"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How much free time do you have after school:
-            </FormLabel>
-            <RadioGroup row value={freeTime} onChange={handleFreeTimeChange}>
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Low"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Low"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="High"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Very High"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How much you go out with your friends:
-            </FormLabel>
-            <RadioGroup row value={goOut} onChange={handleGoOutChange}>
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Rarely"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Rarely"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Occasionally"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Freuently"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Very Freuently"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe your health status:
-            </FormLabel>
-            <RadioGroup row value={health} onChange={handleHealthChange}>
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Bad"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Bad"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Fair"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Good"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Excellent"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe your class participation in school:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={classParticipation}
-              onChange={handleClassParticipationChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Low"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Low"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="High"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Very High"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How much motivated are you to study:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={motivation}
-              onChange={handleMotivationChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Low"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Low"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="High"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Very High"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How much self-discipline do you have:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={selfDiscipline}
-              onChange={handleSelfDisciplineChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Low"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Low"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="High"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Very High"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe the quality of teacher in your school:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={teacherQuality}
-              onChange={handleTeacherQualityChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Poor"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Poor"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Good"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Excellent"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe your time management skills:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={timeManagement}
-              onChange={handleTimeManagementChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Poor"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Poor"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Good"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Excellent"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How much you feel influenced by your peers in your studies:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={peerInfluence}
-              onChange={handlePeerInfluenceChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Negative"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Negative"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Neutral"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Positive"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Very Positive"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe involvemnt of your parents in your studies:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={timeManagement}
-              onChange={handleTimeManagementChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Low"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Low"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="High"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Very High"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe teacher relation with students in your
-              school:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={teacherStudentRelationship}
-              onChange={handleTeacherStudentRelationshipChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Poor"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Poor"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Good"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Excellent"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe your stress level during studies:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={stressLevel}
-              onChange={handleStressLevelChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Low"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Low"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Moderate"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="High"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Very High"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe your mental health during studies:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={mentalHealth}
-              onChange={handleMentalHealthChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Poor"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Poor"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Good"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Excellent"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe your goal setting during studies:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={goalsSetting}
-              onChange={handleGoalsSettingChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Low"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Low"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Good"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Excellent"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How much learning resources are available to you:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={learningResources}
-              onChange={handleLearningResourcesChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Insufficient"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Insufficient"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Adequate"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Good"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Excellent"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How often do you go for group studies:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={groupStudy}
-              onChange={handleGroupStudyChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Never"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Rarely"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Sometimes"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Often"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Always"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe your interest in subjects:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={subjectInterest}
-              onChange={handleSubjectInterestChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Low"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Low"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="High"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Very High"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe classroom environment:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={classroomEnvironment}
-              onChange={handleClassroomEnvironmentChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Low"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Low"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Good"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Excellent"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe your preparation for exams:
-            </FormLabel>
-            <RadioGroup
-              row
-              value={testPreparation}
-              onChange={handleTestPreparationChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Poor"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Poor"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Average"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Good"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Excellent"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <FormControl component="fieldset" fullWidth margin="normal">
-            <FormLabel component="legend">
-              How would you describe workload of your course:
-            </FormLabel>
-            <RadioGroup row value={workload} onChange={handleWorkloadChange}>
-              <FormControlLabel
-                value="1"
-                control={<Radio color="primary" />}
-                label="Very Light"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio color="primary" />}
-                label="Light"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio color="primary" />}
-                label="Manageable"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio color="primary" />}
-                label="Heavy"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio color="primary" />}
-                label="Very Heavy"
-              />
-            </RadioGroup>
-          </FormControl>
-
-          <TextField
-            label="Attendance Rate (%)"
-            value={attendanceRate}
-            onChange={handleAttendanceRateChange}
-            error={failuresError} //To display error state for invalid input
-            helperText={failuresError && "Please enter a failure number"} //helper text to show when there's an error.
-            fullWidth
-            margin="normal"
-            FormHelperTextProps={{
-              sx: {
-                position: "absolute",
-                top: "100%",
-              },
-            }}
-            type="number"
-          />
-
-          <TextField
-            label="Time spent on study (hours/week)"
-            value={timeSpentOnHomework}
-            onChange={handleTimeSpentOnHomeworkChange}
-            error={failuresError} //To display error state for invalid input
-            helperText={failuresError && "Please enter time spent on homework"} //helper text to show when there's an error.
-            fullWidth
-            margin="normal"
-            FormHelperTextProps={{
-              sx: {
-                position: "absolute",
-                top: "100%",
-              },
-            }}
-            type="number"
-          />
-
-          <TextField
-            label="Time spent on extra curricular activity (hours/week)"
-            value={timeSpentOnExtraActivities}
-            onChange={handleTimeSpentOnExtraActivitiesChange}
-            error={failuresError} //To display error state for invalid input
-            helperText={
-              failuresError &&
-              "Please enter time spent on extra curricular activity"
-            } //helper text to show when there's an error.
-            fullWidth
-            margin="normal"
-            FormHelperTextProps={{
-              sx: {
-                position: "absolute",
-                top: "100%",
-              },
-            }}
-            type="number"
-          />
-        </div>
-
-        <div
-          id="course"
-          style={{
-            width: "100%",
-            padding: "24px 24px",
-            maxWidth: "1100px",
-          }}
-        >
-          <Typography variant="h5" align="center" color="textPrimary">
-            Course Information
-          </Typography>
-          <TextField
-            label="Degree (short form)"
-            value={degree}
-            onChange={handleDegreeChange}
-            error={failuresError} //To display error state for invalid input
-            helperText={failuresError && "Please enter a degree"} //helper text to show when there's an error.
-            fullWidth
-            margin="normal"
-            FormHelperTextProps={{
-              sx: {
-                position: "absolute",
-                top: "100%",
-              },
-            }}
-            type="text"
-          />
-
-          <TextField
-            label="Semester Number"
-            value={semester}
-            onChange={handleSemesterChange}
-            error={failuresError} //To display error state for invalid input
-            helperText={failuresError && "Please enter semester"} //helper text to show when there's an error.
-            fullWidth
-            margin="normal"
-            FormHelperTextProps={{
-              sx: {
-                position: "absolute",
-                top: "100%",
-              },
-            }}
-            type="number"
-          />
-
-          <TextField
-            label="Subjects of this semester seprated with coma ','"
-            value={subject}
-            onChange={handleSubjectChange}
-            error={failuresError} //To display error state for invalid input
-            helperText={failuresError && "Please enter subjects"} //helper text to show when there's an error.
-            fullWidth
-            margin="normal"
-            FormHelperTextProps={{
-              sx: {
-                position: "absolute",
-                top: "100%",
-              },
-            }}
-            type="text"
-          />
-
-          <TextField
-            label="Subjects Code of this semester seprated with coma ','"
-            value={subjectCode}
-            onChange={handleSubjectCodeChange}
-            error={failuresError} //To display error state for invalid input
-            helperText={failuresError && "Please enter subjects code"} //helper text to show when there's an error.
-            fullWidth
-            margin="normal"
-            FormHelperTextProps={{
-              sx: {
-                position: "absolute",
-                top: "100%",
-              },
-            }}
-            type="text"
-          />
-
-          <TextField
-            label="Mid Semester Marks of each subject seprated with coma ',' (out of 30)"
-            value={midSemMarks}
-            onChange={handleMidSemMarksChange}
-            error={failuresError} //To display error state for invalid input
-            helperText={failuresError && "Please enter a mid semester marks"} //helper text to show when there's an error.
-            fullWidth
-            margin="normal"
-            FormHelperTextProps={{
-              sx: {
-                position: "absolute",
-                top: "100%",
-              },
-            }}
-            type="number"
-          />
-
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={(event) => {
-              handleSubmit(event);
-            }}
-            style={{ marginTop: "24px", width: "100%" }}
-          >
-            Save
-          </Button>
-        </div>
       </Container>
     </ThemeProvider>
   );

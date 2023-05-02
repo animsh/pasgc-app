@@ -107,6 +107,132 @@ const Profile = () => {
   const [ageError, setAgeError] = useState(false);
   const [failuresError, setFailuresError] = useState(false);
 
+  const genderOptions = [
+    { value: "male", label: "Male" },
+    { value: "female", label: "Female" },
+  ];
+
+  const familySizeOptions = [
+    { value: "LE3", label: "Less than 3" },
+    { value: "GT3", label: "Greater than 3" },
+  ];
+
+  const parentStatusOptions = [
+    { value: "T", label: "Together" },
+    { value: "A", label: "Apart" },
+  ];
+
+  const educationOptions = [
+    { value: "0", label: "None" },
+    { value: "1", label: "Primary" },
+    { value: "2", label: "Secondary" },
+    { value: "3", label: "Higher" },
+  ];
+
+  const jobOptions = [
+    { value: "teacher", label: "Teacher" },
+    { value: "health", label: "Health" },
+    { value: "services", label: "Services" },
+    { value: "at_home", label: "At Home" },
+    { value: "other", label: "Other" },
+  ];
+
+  const reasonOptions = [
+    { value: "home", label: "Home" },
+    { value: "reputation", label: "Reputation" },
+    { value: "course", label: "Course" },
+    { value: "other", label: "Other" },
+  ];
+
+  const guardianOptions = [
+    { value: "mother", label: "Mother" },
+    { value: "father", label: "Father" },
+    { value: "other", label: "Other" },
+  ];
+
+  const travelTimeOptions = [
+    { value: "1", label: "<15 min" },
+    { value: "2", label: "15-30 min" },
+    { value: "3", label: "30-60 min" },
+    { value: "4", label: ">60 min" },
+  ];
+
+  const studyTimeOptions = [
+    { value: "1", label: "<2 hours" },
+    { value: "2", label: "2-5 hours" },
+    { value: "3", label: "5-10 hours" },
+    { value: "4", label: ">10 hours" },
+  ];
+
+  const yesNoOptions = [
+    { value: "no", label: "No" },
+    { value: "yes", label: "Yes" },
+  ];
+
+  const veryBadToVeryGoodOptions = [
+    { value: "1", label: "Very Bad" },
+    { value: "2", label: "Bad" },
+    { value: "3", label: "Neutral" },
+    { value: "4", label: "Good" },
+    { value: "5", label: "Very Good" },
+  ];
+
+  const veryLowToVeryHighOptions = [
+    { value: "1", label: "Very Low" },
+    { value: "2", label: "Low" },
+    { value: "3", label: "Average/Moderate" },
+    { value: "4", label: "High" },
+    { value: "5", label: "Very High" },
+  ];
+
+  const veryRareToVeryFrequntOptions = [
+    { value: "1", label: "Very Rare" },
+    { value: "2", label: "Rare" },
+    { value: "3", label: "Average" },
+    { value: "4", label: "Frequent" },
+    { value: "5", label: "Very Frequent" },
+  ];
+
+  const veryBadToExcellentOptions = [
+    { value: "1", label: "Very Poor" },
+    { value: "2", label: "Poor" },
+    { value: "3", label: "Average" },
+    { value: "4", label: "Good" },
+    { value: "5", label: "Excellent" },
+  ];
+
+  const veryNegativeToVeryPositiveOptions = [
+    { value: "1", label: "Very Negative" },
+    { value: "2", label: "Negative" },
+    { value: "3", label: "Neutral" },
+    { value: "4", label: "Positive" },
+    { value: "5", label: "Very Positive" },
+  ];
+
+  const veryInsufficientToVerySufficientOptions = [
+    { value: "1", label: "Very Insufficient" },
+    { value: "2", label: "Insufficient" },
+    { value: "3", label: "Neutral" },
+    { value: "4", label: "Sufficient" },
+    { value: "5", label: "Very Sufficient" },
+  ];
+
+  const neverToAlwaysOptions = [
+    { value: "1", label: "Never" },
+    { value: "2", label: "Rarely" },
+    { value: "3", label: "Sometimes" },
+    { value: "4", label: "Often" },
+    { value: "5", label: "Always" },
+  ];
+
+  const veryLightToVeryHeavyOptions = [
+    { value: "1", label: "Very Light" },
+    { value: "2", label: "Light" },
+    { value: "3", label: "Neutral" },
+    { value: "4", label: "Heavy" },
+    { value: "5", label: "Very Heavy" },
+  ];
+
   const validateName = () => {
     setNameError(!name.trim());
   };
@@ -1036,12 +1162,6 @@ const Profile = () => {
     }
   };
 
-  const options = [
-    { value: "option1", label: "Option 1" },
-    { value: "option2", label: "Option 2" },
-    { value: "option3", label: "Option 3" },
-  ];
-
   const styles = {
     chip: {
       marginRight: "8px",
@@ -1060,9 +1180,9 @@ const Profile = () => {
   const handleChipClick = (chipId, target) => {
     setSelectedChipId(chipId);
     scroller.scrollTo(target, {
-      duration: 500,
+      duration: 1000,
       smooth: true,
-      offset: -140 /* Replace with the height of your Navbar */,
+      offset: -180 /* Replace with the height of your Navbar */,
     });
   };
 
@@ -1239,7 +1359,7 @@ const Profile = () => {
             width="1100px"
             margin="auto"
             zIndex={1000}
-            sx={{ maxWidth: "100%", px: 2 }}
+            sx={{ maxWidth: "100%" }}
           >
             <Tabs
               value={value}
@@ -1255,11 +1375,12 @@ const Profile = () => {
             {/* Content for Marks Analysis tab */}
             <Box
               position="fixed"
-              top="130px" /* Replace with the height of your Navbar */
+              top="128px" /* Replace with the height of your Navbar */
               color="white"
               textAlign="center"
               width="1100px"
               margin="auto"
+              bgcolor="background.paper"
               zIndex={1000}
               sx={{ maxWidth: "100%", px: 2 }}
             >
@@ -1284,7 +1405,7 @@ const Profile = () => {
               id="personal"
               style={{
                 width: "100%",
-                marginTop: "60px",
+                marginTop: "80px",
                 padding: "24px 24px",
                 maxWidth: "1100px",
               }}
@@ -1327,21 +1448,27 @@ const Profile = () => {
                 type="number"
               />
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">Gender/Sex:</FormLabel>
-                <RadioGroup row value={sex} onChange={handleSexChange}>
-                  <FormControlLabel
-                    value="male"
-                    control={<Radio color="primary" />}
-                    label="Male"
-                  />
-                  <FormControlLabel
-                    value="female"
-                    control={<Radio color="primary" />}
-                    label="Female"
-                  />
-                </RadioGroup>
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  What is your gender?
+                </FormLabel>
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
+                  value={sex}
+                  onChange={handleSexChange}
+                >
+                  {genderOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
+
 
               <TextField
                 label="Age"
@@ -1362,203 +1489,133 @@ const Profile = () => {
                 type="number"
               />
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">Family Size:</FormLabel>
-                <RadioGroup
-                  row
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  What is the size of your family?
+                </FormLabel>
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={familySize}
                   onChange={handleFamilySizeChange}
                 >
-                  <FormControlLabel
-                    value="LE3"
-                    control={<Radio color="primary" />}
-                    label="Less than or equal to 3"
-                  />
-                  <FormControlLabel
-                    value="GT3"
-                    control={<Radio color="primary" />}
-                    label="Greater than 3"
-                  />
-                </RadioGroup>
+                  {familySizeOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  Parent's Cohabitation Status:
+
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  What is you parent's cohabitaion status?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={parentsCohabitation}
                   onChange={handleParentsCohabitationChange}
                 >
-                  <FormControlLabel
-                    value="T"
-                    control={<Radio color="primary" />}
-                    label="Together"
-                  />
-                  <FormControlLabel
-                    value="A"
-                    control={<Radio color="primary" />}
-                    label="Apart"
-                  />
-                </RadioGroup>
+                  {parentStatusOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  Mother's Education Level:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  What is your mother's eduction level?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={mothersEducation}
                   onChange={handleMothersEducationChange}
                 >
-                  <FormControlLabel
-                    value="0"
-                    control={<Radio color="primary" />}
-                    label="None"
-                  />
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Primary Education (4th grade)"
-                  />
-
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="5th to 9th grade"
-                  />
-
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Secondary Education"
-                  />
-
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Higher Education"
-                  />
-                </RadioGroup>
+                  {educationOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  Father's Education Level:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  What is your father's eduction level?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={fathersEducation}
                   onChange={handleFathersEducationChange}
                 >
-                  <FormControlLabel
-                    value="0"
-                    control={<Radio color="primary" />}
-                    label="None"
-                  />
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Primary Education (4th grade)"
-                  />
-
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="5th to 9th grade"
-                  />
-
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Secondary Education"
-                  />
-
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Higher Education"
-                  />
-                </RadioGroup>
+                  {educationOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">Mother's Job:</FormLabel>
-                <RadioGroup
-                  row
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  What is your mother's job?
+                </FormLabel>
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={mothersJob}
                   onChange={handleMothersJobChange}
                 >
-                  <FormControlLabel
-                    value="teacher"
-                    control={<Radio color="primary" />}
-                    label="Teacher"
-                  />
-                  <FormControlLabel
-                    value="health"
-                    control={<Radio color="primary" />}
-                    label="Health care related"
-                  />
-
-                  <FormControlLabel
-                    value="services"
-                    control={<Radio color="primary" />}
-                    label="Civil services (e.g. administrative or police)"
-                  />
-
-                  <FormControlLabel
-                    value="at_home"
-                    control={<Radio color="primary" />}
-                    label="At Home"
-                  />
-
-                  <FormControlLabel
-                    value="other"
-                    control={<Radio color="primary" />}
-                    label="Other"
-                  />
-                </RadioGroup>
+                  {jobOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">Father's Job:</FormLabel>
-                <RadioGroup
-                  row
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  What is your father's job?
+                </FormLabel>
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={fathersJob}
                   onChange={handleFathersJobChange}
                 >
-                  <FormControlLabel
-                    value="teacher"
-                    control={<Radio color="primary" />}
-                    label="Teacher"
-                  />
-                  <FormControlLabel
-                    value="health"
-                    control={<Radio color="primary" />}
-                    label="Health care related"
-                  />
-
-                  <FormControlLabel
-                    value="services"
-                    control={<Radio color="primary" />}
-                    label="Civil services (e.g. administrative or police)"
-                  />
-
-                  <FormControlLabel
-                    value="at_home"
-                    control={<Radio color="primary" />}
-                    label="At Home"
-                  />
-
-                  <FormControlLabel
-                    value="other"
-                    control={<Radio color="primary" />}
-                    label="Other"
-                  />
-                </RadioGroup>
+                  {jobOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
+
             </div>
 
             <div
@@ -1572,133 +1629,93 @@ const Profile = () => {
               <Typography variant="h5" align="center" color="textPrimary">
                 School and Academics Details
               </Typography>
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  Reason to choose school/college:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  What is your reason to choose your college?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={reasonToJoinCollege}
                   onChange={handleReasonToJoinCollegeChange}
                 >
-                  <FormControlLabel
-                    value="home"
-                    control={<Radio color="primary" />}
-                    label="Close to home"
-                  />
-                  <FormControlLabel
-                    value="reputation"
-                    control={<Radio color="primary" />}
-                    label="College/School reputation"
-                  />
-
-                  <FormControlLabel
-                    value="course"
-                    control={<Radio color="primary" />}
-                    label="Course"
-                  />
-
-                  <FormControlLabel
-                    value="other"
-                    control={<Radio color="primary" />}
-                    label="Other"
-                  />
-                </RadioGroup>
+                  {reasonOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">Guardian:</FormLabel>
-                <RadioGroup
-                  row
+
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  Who is your guardian?
+                </FormLabel>
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={guardian}
                   onChange={handleGuardianChange}
                 >
-                  <FormControlLabel
-                    value="mother"
-                    control={<Radio color="primary" />}
-                    label="Mother"
-                  />
-                  <FormControlLabel
-                    value="father"
-                    control={<Radio color="primary" />}
-                    label="Father"
-                  />
-
-                  <FormControlLabel
-                    value="other"
-                    control={<Radio color="primary" />}
-                    label="Other"
-                  />
-                </RadioGroup>
+                  {guardianOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  Home to college travel time:
+
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  How much time does it take you to travel from home to college?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={travelTime}
                   onChange={handleTravelTimeChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="< 15 min"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="15 to 30 min"
-                  />
-
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="30 min to 1 hour"
-                  />
-
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="> 1 hour"
-                  />
-                </RadioGroup>
+                  {travelTimeOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  Weekly study time outside school/college:
+
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  How much time do you study weekly outside college?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={studyTime}
                   onChange={handleStudyTimeChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="< 2 hours"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="2 to 5 hours"
-                  />
-
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="5 to 10 hours"
-                  />
-
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="> 10 hour"
-                  />
-                </RadioGroup>
+                  {studyTimeOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
+
 
               <TextField
                 label="Past class failures"
@@ -1717,901 +1734,574 @@ const Profile = () => {
                 type="number"
               />
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  Do you have school/college support:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  Does your college supports you?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={schoolSupport}
                   onChange={handleSchoolSupporChange}
                 >
-                  <FormControlLabel
-                    value="yes"
-                    control={<Radio color="primary" />}
-                    label="Yes"
-                  />
-                  <FormControlLabel
-                    value="no"
-                    control={<Radio color="primary" />}
-                    label="No"
-                  />
-                </RadioGroup>
+                  {yesNoOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  Do you hvae family support:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  Do you have support from you family?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={familySupport}
                   onChange={handleFamilySupportChange}
                 >
-                  <FormControlLabel
-                    value="yes"
-                    control={<Radio color="primary" />}
-                    label="Yes"
-                  />
-                  <FormControlLabel
-                    value="no"
-                    control={<Radio color="primary" />}
-                    label="No"
-                  />
-                </RadioGroup>
+                  {yesNoOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  Do you do any extra activity:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  Do you do any extra activities?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={extraActivities}
                   onChange={handleExtraActivitiesChange}
                 >
-                  <FormControlLabel
-                    value="yes"
-                    control={<Radio color="primary" />}
-                    label="Yes"
-                  />
-                  <FormControlLabel
-                    value="no"
-                    control={<Radio color="primary" />}
-                    label="No"
-                  />
-                </RadioGroup>
+                  {yesNoOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">Have you done nursery:</FormLabel>
-                <RadioGroup row value={nursery} onChange={handleNurseryChange}>
-                  <FormControlLabel
-                    value="yes"
-                    control={<Radio color="primary" />}
-                    label="Yes"
-                  />
-                  <FormControlLabel
-                    value="no"
-                    control={<Radio color="primary" />}
-                    label="No"
-                  />
-                </RadioGroup>
-              </FormControl>
-
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  Do you want to pursue higher education:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  Have you done nursery?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
+                  value={nursery}
+                  onChange={handleNurseryChange}
+                >
+                  {yesNoOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  Do have any plan for higher education?
+                </FormLabel>
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={higherEducation}
                   onChange={handleHigherEducationChange}
                 >
-                  <FormControlLabel
-                    value="yes"
-                    control={<Radio color="primary" />}
-                    label="Yes"
-                  />
-                  <FormControlLabel
-                    value="no"
-                    control={<Radio color="primary" />}
-                    label="No"
-                  />
-                </RadioGroup>
+                  {yesNoOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  Do you have access to the internet:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  Do you have internet access?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={internetAccess}
                   onChange={handleInternetAccessChange}
                 >
-                  <FormControlLabel
-                    value="yes"
-                    control={<Radio color="primary" />}
-                    label="Yes"
-                  />
-                  <FormControlLabel
-                    value="no"
-                    control={<Radio color="primary" />}
-                    label="No"
-                  />
-                </RadioGroup>
+                  {yesNoOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  How would you describe your relationship with your family:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  How would you rate your family relationship?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={familyRelationship}
                   onChange={handleFamilyRelationshipChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Bad"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Bad"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Neutral"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Good"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Very Good"
-                  />
-                </RadioGroup>
+                  {veryBadToVeryGoodOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  How much free time do you have after school:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  How much free time do you have after college?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={freeTime}
                   onChange={handleFreeTimeChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Low"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Low"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="High"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Very High"
-                  />
-                </RadioGroup>
+                  {veryLowToVeryHighOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  How much you go out with your friends:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  How much time do you spend with your friends?
                 </FormLabel>
-                <RadioGroup row value={goOut} onChange={handleGoOutChange}>
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Rarely"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Rarely"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Occasionally"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Freuently"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Very Freuently"
-                  />
-                </RadioGroup>
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
+                  value={goOut}
+                  onChange={handleGoOutChange}
+                >
+                  {veryRareToVeryFrequntOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  How would you describe your health status:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  How would you describe your health status?
                 </FormLabel>
-                <RadioGroup row value={health} onChange={handleHealthChange}>
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Bad"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Bad"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Fair"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Good"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Excellent"
-                  />
-                </RadioGroup>
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
+                  value={health}
+                  onChange={handleHealthChange}
+                >
+                  {veryBadToExcellentOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
+
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
                   How would you describe your class participation in school:
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={classParticipation}
                   onChange={handleClassParticipationChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Low"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Low"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="High"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Very High"
-                  />
-                </RadioGroup>
+                  {veryLowToVeryHighOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  How much motivated are you to study:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  How much motivated are you to study?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={motivation}
                   onChange={handleMotivationChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Low"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Low"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="High"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Very High"
-                  />
-                </RadioGroup>
+                  {veryLowToVeryHighOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  How much self-discipline do you have:
+
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  How much self-discipline do you have?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={selfDiscipline}
                   onChange={handleSelfDisciplineChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Low"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Low"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="High"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Very High"
-                  />
-                </RadioGroup>
+                  {veryLowToVeryHighOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  How would you describe the quality of teacher in your school:
+
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  How would you describe the quality of teacher in your school?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={teacherQuality}
                   onChange={handleTeacherQualityChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Poor"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Poor"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Good"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Excellent"
-                  />
-                </RadioGroup>
+                  {veryBadToVeryGoodOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  How would you describe your time management skills:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  How would you describe your time management skills?
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={timeManagement}
                   onChange={handleTimeManagementChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Poor"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Poor"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Good"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Excellent"
-                  />
-                </RadioGroup>
+                  {veryBadToExcellentOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
                   How much you feel influenced by your peers in your studies:
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={peerInfluence}
                   onChange={handlePeerInfluenceChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Negative"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Negative"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Neutral"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Positive"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Very Positive"
-                  />
-                </RadioGroup>
+                  {veryNegativeToVeryPositiveOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  How would you describe involvemnt of your parents in your
-                  studies:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  How would you describe involvemnt of your parents in your studies:
                 </FormLabel>
-                <RadioGroup
-                  row
-                  value={timeManagement}
-                  onChange={handleTimeManagementChange}
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
+                  value={parentalInvolvement}
+                  onChange={handleParentalInvolvementChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Low"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Low"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="High"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Very High"
-                  />
-                </RadioGroup>
+                  {veryBadToVeryGoodOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
-                  How would you describe teacher relation with students in your
-                  school:
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  How would you describe teacher relation with students in your school:
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={teacherStudentRelationship}
                   onChange={handleTeacherStudentRelationshipChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Poor"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Poor"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Good"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Excellent"
-                  />
-                </RadioGroup>
+                  {veryBadToExcellentOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
                   How would you describe your stress level during studies:
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={stressLevel}
                   onChange={handleStressLevelChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Low"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Low"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Moderate"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="High"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Very High"
-                  />
-                </RadioGroup>
+                  {veryLowToVeryHighOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
                   How would you describe your mental health during studies:
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={mentalHealth}
                   onChange={handleMentalHealthChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Poor"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Poor"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Good"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Excellent"
-                  />
-                </RadioGroup>
+                  {veryBadToExcellentOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
                   How would you describe your goal setting during studies:
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={goalsSetting}
                   onChange={handleGoalsSettingChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Low"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Low"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Good"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Excellent"
-                  />
-                </RadioGroup>
+                  {veryBadToExcellentOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
                   How much learning resources are available to you:
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={learningResources}
                   onChange={handleLearningResourcesChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Insufficient"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Insufficient"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Adequate"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Good"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Excellent"
-                  />
-                </RadioGroup>
+                  {veryInsufficientToVerySufficientOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
                   How often do you go for group studies:
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={groupStudy}
                   onChange={handleGroupStudyChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Never"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Rarely"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Sometimes"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Often"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Always"
-                  />
-                </RadioGroup>
+                  {neverToAlwaysOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
                   How would you describe your interest in subjects:
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={subjectInterest}
                   onChange={handleSubjectInterestChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Low"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Low"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="High"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Very High"
-                  />
-                </RadioGroup>
+                  {veryLowToVeryHighOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
                   How would you describe classroom environment:
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={classroomEnvironment}
                   onChange={handleClassroomEnvironmentChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Low"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Low"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Good"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Excellent"
-                  />
-                </RadioGroup>
+                  {veryBadToExcellentOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
                   How would you describe your preparation for exams:
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={testPreparation}
                   onChange={handleTestPreparationChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Poor"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Poor"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Average"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Good"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Excellent"
-                  />
-                </RadioGroup>
+                  {veryBadToExcellentOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
-              <FormControl component="fieldset" fullWidth margin="normal">
-                <FormLabel component="legend">
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
                   How would you describe workload of your course:
                 </FormLabel>
-                <RadioGroup
-                  row
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
                   value={workload}
                   onChange={handleWorkloadChange}
                 >
-                  <FormControlLabel
-                    value="1"
-                    control={<Radio color="primary" />}
-                    label="Very Light"
-                  />
-                  <FormControlLabel
-                    value="2"
-                    control={<Radio color="primary" />}
-                    label="Light"
-                  />
-                  <FormControlLabel
-                    value="3"
-                    control={<Radio color="primary" />}
-                    label="Manageable"
-                  />
-                  <FormControlLabel
-                    value="4"
-                    control={<Radio color="primary" />}
-                    label="Heavy"
-                  />
-                  <FormControlLabel
-                    value="5"
-                    control={<Radio color="primary" />}
-                    label="Very Heavy"
-                  />
-                </RadioGroup>
+                  {veryLightToVeryHeavyOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
 
               <TextField

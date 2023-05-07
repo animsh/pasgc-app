@@ -17,6 +17,7 @@ import { scroller } from "react-scroll";
 import { Tabs, Tab } from "@mui/material";
 import { InputLabel, Slider, FormHelperText } from "@mui/material";
 import { MenuItem, Select } from "@mui/material";
+import { sendGradeData } from "../helper";
 
 const theme = createTheme({
   typography: {
@@ -243,11 +244,11 @@ const Profile = () => {
   };
 
   const validateEnrollmentNumber = () => {
-    setEnrollmentNumberError(!enrollmentNumber.trim());
+    setEnrollmentNumberError(!enrollmentNumber);
   };
 
   const validateAge = () => {
-    setAgeError(!age.trim());
+    setAgeError(!age);
   };
 
   const validateAddress = () => {
@@ -279,15 +280,15 @@ const Profile = () => {
   };
 
   const validateMothersEducation = () => {
-    console.log(!mothersEducation.trim());
-    if (!mothersEducation.trim()) {
+    console.log(!mothersEducation);
+    if (!mothersEducation) {
       alert("Please select MOTHER'S EDUCATION");
     }
   };
 
   const validateFathersEducation = () => {
-    console.log(!fathersEducation.trim());
-    if (!fathersEducation.trim()) {
+    console.log(fathersEducation);
+    if (!fathersEducation) {
       alert("Please select FATHER'S EDUCATION");
     }
   };
@@ -321,21 +322,21 @@ const Profile = () => {
   };
 
   const validateTravelTime = () => {
-    console.log(!travelTime.trim());
-    if (!travelTime.trim()) {
+    console.log(!travelTime);
+    if (!travelTime) {
       alert("Please select TRAVEL TIME");
     }
   };
 
   const validateStudyTime = () => {
-    console.log(!studyTime.trim());
-    if (!studyTime.trim()) {
+    console.log(!studyTime);
+    if (!studyTime) {
       alert("Please select STUDY TIME");
     }
   };
 
   const validateFailure = () => {
-    setFailuresError(!failures.trim());
+    setFailuresError(!failures);
   };
 
   const validateSchoolSupport = () => {
@@ -381,46 +382,47 @@ const Profile = () => {
   };
 
   const validateFamilyRelationship = () => {
-    console.log(!familyRelationship.trim());
-    if (!familyRelationship.trim()) {
+    console.log(!familyRelationship);
+    if (!familyRelationship) {
       alert("Please select FAMILY RELATIONSHIP");
     }
   };
 
   const validateFreeTime = () => {
-    console.log(!freeTime.trim());
-    if (!freeTime.trim()) {
+    console.log(!freeTime);
+    if (!freeTime) {
       alert("Please select FREE TIME");
     }
   };
 
   const validateGoingOut = () => {
-    console.log(!goOut.trim());
-    if (!goOut.trim()) {
+    console.log(!goOut);
+    if (!goOut) {
       alert("Please select GOING OUT");
     }
   };
 
   const validateHealth = () => {
-    console.log(!health.trim());
-    if (!health.trim()) {
+    console.log(!health);
+    if (!health) {
       alert("Please select HEALTH");
     }
   };
 
   const validateAbsences = () => {
-    console.log(!absences.trim());
-    if (!absences.trim()) {
-      alert("Please select ABSENCES");
-    }
+    // console.log(!absences.trim());
+    // if (!absences.trim()) {
+    //   alert("Please select ABSENCES");
+    // }
 
-    if (absences > 93) {
-      alert("Please enter valid ABSENCES");
-    }
+    // if (absences > 93) {
+    //   alert("Please enter valid ABSENCES");
+    // }
 
-    if (absences < 0) {
-      alert("Please enter valid ABSENCES");
-    }
+    // if (absences < 0) {
+    //   alert("Please enter valid ABSENCES");
+    // }
+    setAbsences(100 - attendanceRate)
   };
 
   const validateMidSemesterMarks = () => {
@@ -439,8 +441,8 @@ const Profile = () => {
   };
 
   const validateAttendaceRate = () => {
-    console.log(!attendanceRate.trim());
-    if (!attendanceRate.trim()) {
+    console.log(!attendanceRate);
+    if (!attendanceRate) {
       alert("Please select ATTENDANCE RATE");
     }
 
@@ -454,92 +456,92 @@ const Profile = () => {
   };
 
   const validateClassParticipation = () => {
-    console.log(!classParticipation.trim());
-    if (!classParticipation.trim()) {
+    console.log(!classParticipation);
+    if (!classParticipation) {
       alert("Please select CLASS PARTICIPATION");
     }
   };
 
   const validateMotivation = () => {
-    console.log(!motivation.trim());
-    if (!motivation.trim()) {
+    console.log(!motivation);
+    if (!motivation) {
       alert("Please select MOTIVATION");
     }
   };
 
   const validateSelfDiscipline = () => {
-    console.log(!selfDiscipline.trim());
-    if (!selfDiscipline.trim()) {
+    console.log(!selfDiscipline);
+    if (!selfDiscipline) {
       alert("Please select SELF DISCIPLINE");
     }
   };
 
   const validateTeacherQuality = () => {
-    console.log(!teacherQuality.trim());
-    if (!teacherQuality.trim()) {
+    console.log(!teacherQuality);
+    if (!teacherQuality) {
       alert("Please select TEACHER QUALITY");
     }
   };
 
   const validateTimeManagement = () => {
-    console.log(!timeManagement.trim());
-    if (!timeManagement.trim()) {
+    console.log(!timeManagement);
+    if (!timeManagement) {
       alert("Please select TIME MANAGEMENT");
     }
   };
 
   const validatePeerInfluence = () => {
-    console.log(!peerInfluence.trim());
-    if (!peerInfluence.trim()) {
+    console.log(!peerInfluence);
+    if (!peerInfluence) {
       alert("Please select PEER INFLUENCE");
     }
   };
 
   const validateParentalInvolvement = () => {
-    console.log(!parentalInvolvement.trim());
-    if (!parentalInvolvement.trim()) {
+    console.log(!parentalInvolvement);
+    if (!parentalInvolvement) {
       alert("Please select PARENTAL INVOLVEMENT");
     }
   };
 
   const validateTeacherStudentRelationship = () => {
-    console.log(!teacherStudentRelationship.trim());
-    if (!teacherStudentRelationship.trim()) {
+    console.log(!teacherStudentRelationship);
+    if (!teacherStudentRelationship) {
       alert("Please select TEACHER STUDENT RELATIONSHIP");
     }
   };
 
   const validateStressLevel = () => {
-    console.log(!stressLevel.trim());
-    if (!stressLevel.trim()) {
+    console.log(!stressLevel);
+    if (!stressLevel) {
       alert("Please select STRESS LEVEL");
     }
   };
 
   const validateMentalHealth = () => {
-    console.log(!mentalHealth.trim());
-    if (!mentalHealth.trim()) {
+    console.log(!mentalHealth);
+    if (!mentalHealth) {
       alert("Please select MENTAL HEALTH");
     }
   };
 
   const validateGoalSetting = () => {
-    console.log(!goalsSetting.trim());
-    if (!goalsSetting.trim()) {
+    console.log(!goalsSetting);
+    if (!goalsSetting) {
       alert("Please select GOAL SETTING");
     }
   };
 
   const validateLearningReasources = () => {
-    console.log(!learningResources.trim());
-    if (!learningResources.trim()) {
+    console.log(!learningResources);
+    if (!learningResources) {
       alert("Please select LEARNING RESOURCES");
     }
   };
 
   const validateGroupStudy = () => {
-    console.log(!groupStudy.trim());
-    if (!groupStudy.trim()) {
+    console.log(!groupStudy);
+    if (!groupStudy) {
       alert("Please select GROUP STUDY");
     }
   };
@@ -552,22 +554,22 @@ const Profile = () => {
   };
 
   const validateSubjectInterest = () => {
-    console.log(!subjectInterest.trim());
-    if (!subjectInterest.trim()) {
+    console.log(!subjectInterest);
+    if (!subjectInterest) {
       alert("Please select SUBJECT INTEREST");
     }
   };
 
   const validateClassroomEnvironment = () => {
-    console.log(!classroomEnvironment.trim());
-    if (!classroomEnvironment.trim()) {
+    console.log(!classroomEnvironment);
+    if (!classroomEnvironment) {
       alert("Please select CLASS ENVIRONMENT");
     }
   };
 
   const validateTestPreparation = () => {
-    console.log(!testPreparation.trim());
-    if (!testPreparation.trim()) {
+    console.log(!testPreparation);
+    if (!testPreparation) {
       alert("Please select TEST PREPARATION");
     }
   };
@@ -580,8 +582,8 @@ const Profile = () => {
   };
 
   const validateWorkload = () => {
-    console.log(!workload.trim());
-    if (!workload.trim()) {
+    console.log(!workload);
+    if (!workload) {
       alert("Please select WORKLOAD");
     }
   };
@@ -822,7 +824,7 @@ const Profile = () => {
     setSemester(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     validateName();
     validateEnrollmentNumber();
@@ -878,7 +880,73 @@ const Profile = () => {
     validateSubject();
     validateSubjectCode();
     validateSemester();
+
+    if (nameError || ageError || enrollmentNumberError || failuresError) {
+      return;
+    }
+
+    const data = {
+      user_id: 0,
+      name: name,
+      enrollment_number: enrollmentNumber,
+      sex: sex,
+      age: age,
+      address: address,
+      family_size: familySize,
+      parent_status: parentsCohabitation,
+      mother_education: mothersEducation,
+      father_education: fathersEducation,
+      mother_job: mothersJob,
+      father_job: fathersJob,
+      reason: reasonToJoinCollege,
+      guardian: guardian,
+      travel_time: travelTime,
+      study_time: studyTime,
+      failures: failures,
+      school_support: schoolSupport,
+      family_support: familySupport,
+      extra_activities: extraActivities,
+      nursery: nursery,
+      higher: higherEducation,
+      internet: internetAccess,
+      family_relationship: familyRelationship,
+      free_time: freeTime,
+      go_out: goOut,
+      health: health,
+      absences: absences,
+      class_participation: classParticipation,
+      motivation: motivation,
+      self_discipline: selfDiscipline,
+      teacher_quality: teacherQuality,
+      time_management: timeManagement,
+      peer_influence: peerInfluence,
+      parental_involvement: parentalInvolvement,
+      teacher_student_relationship: teacherStudentRelationship,
+      stress_level: stressLevel,
+      mental_health: mentalHealth,
+      goal_setting: goalsSetting,
+      learning_resources: learningResources,
+      group_study: groupStudy,
+      subject_interest: subjectInterest,
+      classroom_environment: classroomEnvironment,
+      test_preparation: testPreparation,
+      workload: workload,
+      attendance_rate: attendanceRate,
+      time_spent_on_homework: timeSpentOnHomework,
+      time_spent_on_extracurricular_activities: timeSpentOnExtraActivities,
+      degree: degree,
+      semester: semester,
+      subjects: subject,
+      subjects_codes: subjectCode,
+      mid_sem_marks: midSemMarks,
+    };
+
+    console.log(data);
+
+    const response = await sendGradeData(data);
+    console.log(response);
   };
+
 
   const [logicalQuotionRating, setLogicalQuotionRating] = useState(0);
   const [hackathons, setHackathons] = useState(0);
@@ -2489,7 +2557,7 @@ const Profile = () => {
                     top: "100%",
                   },
                 }}
-                type="number"
+                type="text"
               />
 
               <Button

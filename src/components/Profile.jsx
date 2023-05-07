@@ -18,6 +18,9 @@ import { Tabs, Tab } from "@mui/material";
 import { InputLabel, Slider, FormHelperText } from "@mui/material";
 import { MenuItem, Select } from "@mui/material";
 import { getGradeData, sendGradeData, updateGradeData } from "../helper";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Snackbar, Alert } from '@mui/material';
+
 
 const theme = createTheme({
   typography: {
@@ -109,6 +112,16 @@ const Profile = () => {
   const [failuresError, setFailuresError] = useState(false);
 
   const [dataIsAvailable, setDataIsAvailable] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState('success');
+  const [message, setMessage] = useState('');
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
 
   const genderOptions = [
     { value: "male", label: "Male" },
@@ -946,16 +959,44 @@ const Profile = () => {
       subjects_codes: subjectCode,
       mid_sem_marks: midSemMarks,
     };
-
-    console.log(data);
+    setIsLoading(true);
 
     if (dataIsAvailable) {
-      // do nothing
-      const response = await updateGradeData(data);
-      console.log(response);
+      try {
+        const response = await updateGradeData(data);
+        console.log(response);
+        if (response.status === 200) {
+          setSeverity('success');
+          setMessage('Data updated successfully!');
+        } else {
+          setMessage('Something went wrong! ' + response.data.detail + ' ' + response.statusText);
+          setSeverity('error');
+        }
+      } catch (error) {
+        setSeverity('error');
+        setMessage('Something went wrong ' + error);
+      } finally {
+        handleOpen();
+        setIsLoading(false);
+      }
     } else {
-      const response = await sendGradeData(data);
-      console.log(response);
+      try {
+        const response = await sendGradeData(data);
+        console.log(response);
+        if (response.status === 200) {
+          setSeverity('success');
+          setMessage('Data saved successfully!');
+        } else {
+          setMessage('Something went wrong! ' + response.data.detail + ' ' + response.statusText);
+          setSeverity('error');
+        }
+      } catch (error) {
+        setSeverity('error');
+        setMessage('Something went wrong ' + error);
+      } finally {
+        handleOpen();
+        setIsLoading(false);
+      }
     }
   };
 
@@ -2643,9 +2684,11 @@ const Profile = () => {
                 onClick={(event) => {
                   handleSubmit(event);
                 }}
-                style={{ marginTop: "24px", width: "100%" }}
+                fullWidth
+                disabled={isLoading} // disable the button while loading
+                sx={{ marginTop: "16px" }}
               >
-                Save
+                {isLoading ? <CircularProgress size={24} /> : 'Save'}
               </Button>
             </div>
           </TabPanel>
@@ -3105,9 +3148,33 @@ const Profile = () => {
                   ))}
                 </Select>
               </FormControl>
+
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={(event) => {
+                  handleSubmitCareer(event);
+                }}
+                fullWidth
+                disabled={isLoading} // disable the button while loading
+                sx={{ marginTop: "16px" }}
+              >
+                {isLoading ? <CircularProgress size={24} /> : 'Save'}
+              </Button>
             </div>
           </TabPanel>
         </Box>
+
+        <Snackbar
+          open={open}
+          autoHideDuration={5000} // How long the toast should stay open, in ms
+          onClose={handleClose}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} // The position of the toast on the screen
+        >
+          <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
+            {message}
+          </Alert>
+        </Snackbar>
       </Container>
     </ThemeProvider>
   );

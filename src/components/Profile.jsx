@@ -17,7 +17,7 @@ import { scroller } from "react-scroll";
 import { Tabs, Tab } from "@mui/material";
 import { InputLabel, Slider, FormHelperText } from "@mui/material";
 import { MenuItem, Select } from "@mui/material";
-import { getGradeData, sendGradeData } from "../helper";
+import { getGradeData, sendGradeData, updateGradeData } from "../helper";
 
 const theme = createTheme({
   typography: {
@@ -108,7 +108,7 @@ const Profile = () => {
   const [ageError, setAgeError] = useState(false);
   const [failuresError, setFailuresError] = useState(false);
 
-  let dataAvailable = false;
+  const [dataIsAvailable, setDataIsAvailable] = useState(false);
 
   const genderOptions = [
     { value: "male", label: "Male" },
@@ -338,7 +338,11 @@ const Profile = () => {
   };
 
   const validateFailure = () => {
-    setFailuresError(!failures);
+    // setFailuresError(!failures);
+    console.log(!failures);
+    if (failures === "") {
+      alert("Please select FAILURES");
+    }
   };
 
   const validateSchoolSupport = () => {
@@ -945,8 +949,10 @@ const Profile = () => {
 
     console.log(data);
 
-    if (dataAvailable) {
+    if (dataIsAvailable) {
       // do nothing
+      const response = await updateGradeData(data);
+      console.log(response);
     } else {
       const response = await sendGradeData(data);
       console.log(response);
@@ -963,7 +969,7 @@ const Profile = () => {
     if (response.status === 200) {
       const data = response.data.data;
 
-      dataAvailable = true;
+      setDataIsAvailable(true);
 
       setEnrollmentNumber(data.enrollment_number);
       setSex(data.sex);

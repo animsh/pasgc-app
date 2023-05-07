@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Chip } from "@mui/material";
 import { Stack } from "@mui/material";
 import TextField from "@mui/material/TextField";
@@ -17,7 +17,7 @@ import { scroller } from "react-scroll";
 import { Tabs, Tab } from "@mui/material";
 import { InputLabel, Slider, FormHelperText } from "@mui/material";
 import { MenuItem, Select } from "@mui/material";
-import { sendGradeData } from "../helper";
+import { getGradeData, sendGradeData } from "../helper";
 
 const theme = createTheme({
   typography: {
@@ -107,6 +107,8 @@ const Profile = () => {
   const [enrollmentNumberError, setEnrollmentNumberError] = useState(false);
   const [ageError, setAgeError] = useState(false);
   const [failuresError, setFailuresError] = useState(false);
+
+  let dataAvailable = false;
 
   const genderOptions = [
     { value: "male", label: "Male" },
@@ -547,8 +549,8 @@ const Profile = () => {
   };
 
   const validateTimeSpentOnHomework = () => {
-    console.log(!timeSpentOnHomework.trim());
-    if (!timeSpentOnHomework.trim()) {
+    console.log(!timeSpentOnHomework);
+    if (!timeSpentOnHomework) {
       alert("Please select TIME SPENT ON HOMEWORK");
     }
   };
@@ -575,8 +577,8 @@ const Profile = () => {
   };
 
   const validateTimeSpentOnExtraCurricularActivities = () => {
-    console.log(!timeSpentOnExtraActivities.trim());
-    if (!timeSpentOnExtraActivities.trim()) {
+    console.log(!timeSpentOnExtraActivities);
+    if (!timeSpentOnExtraActivities) {
       alert("Please select TIME SPENT ON EXTRA CURRICULAR ACTIVITIES");
     }
   };
@@ -610,8 +612,8 @@ const Profile = () => {
   };
 
   const validateSemester = () => {
-    console.log(!semester.trim());
-    if (!semester.trim()) {
+    console.log(!semester);
+    if (!semester) {
       alert("Please select SEMESTER");
     }
   };
@@ -943,10 +945,79 @@ const Profile = () => {
 
     console.log(data);
 
-    const response = await sendGradeData(data);
-    console.log(response);
+    if (dataAvailable) {
+      // do nothing
+    } else {
+      const response = await sendGradeData(data);
+      console.log(response);
+    }
   };
 
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const response = await getGradeData();
+
+    if (response.status === 200) {
+      const data = response.data.data;
+
+      dataAvailable = true;
+
+      setEnrollmentNumber(data.enrollment_number);
+      setSex(data.sex);
+      setAddress(data.address);
+      setAge(data.age);
+      setFamilySize(data.family_size);
+      setParentsCohabitation(data.parent_status);
+      setMothersEducation(data.mother_education);
+      setFathersEducation(data.father_education);
+      setMothersJob(data.mother_job);
+      setFathersJob(data.father_job);
+      setReasonToJoinCollege(data.reason);
+      setGuardian(data.guardian);
+      setTravelTime(data.travel_time);
+      setStudyTime(data.study_time);
+      setFailures(data.failures);
+      setSchoolSupport(data.school_support);
+      setFamilySupport(data.family_support);
+      setExtraActivities(data.extra_activities);
+      setNursery(data.nursery);
+      setHigherEducation(data.higher);
+      setInternetAccess(data.internet);
+      setFamilyRelationship(data.family_relationship);
+      setFreeTime(data.free_time);
+      setGoOut(data.go_out);
+      setHealth(data.health);
+      setAbsences(data.absences);
+      setMidSemMarks(data.mid_sem_marks);
+      setAttendanceRate(data.attendance_rate);
+      setClassParticipation(data.class_participation);
+      setMotivation(data.motivation);
+      setSelfDiscipline(data.self_discipline);
+      setTeacherQuality(data.teacher_quality);
+      setTimeManagement(data.time_management);
+      setPeerInfluence(data.peer_influence);
+      setParentalInvolvement(data.parental_involvement);
+      setTeacherStudentRelationship(data.teacher_student_relationship);
+      setStressLevel(data.stress_level);
+      setMentalHealth(data.mental_health);
+      setGoalsSetting(data.goal_setting);
+      setLearningResources(data.learning_resources);
+      setGroupStudy(data.group_study);
+      setSubjectInterest(data.subject_interest);
+      setClassroomEnvironment(data.classroom_environment);
+      setTestPreparation(data.test_preparation);
+      setWorkload(data.workload);
+      setDegree(data.degree);
+      setSubject(data.subjects);
+      setSubjectCode(data.subjects_codes);
+      setSemester(data.semester);
+      setTimeSpentOnExtraActivities(data.time_spent_on_extracurricular_activities);
+      setTimeSpentOnHomework(data.time_spent_on_homework);
+    }
+  }
 
   const [logicalQuotionRating, setLogicalQuotionRating] = useState(0);
   const [hackathons, setHackathons] = useState(0);

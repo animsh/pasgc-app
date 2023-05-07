@@ -17,6 +17,10 @@ const UpdatedNavBar = ({ isAuthenticated, toggleAuth, toggle, IsLogin, login }) 
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('user_name');
+    localStorage.removeItem('user_email');
+    localStorage.removeItem('user_enrollment_number');
     toggleAuth();
   };
 

@@ -54,9 +54,6 @@ export const getUser = async () => {
     }
 };
 
-
-
-
 export const sendGradeData = async (data) => {
     try {
         const response = await axios.post(
@@ -129,11 +126,10 @@ export const sendGradeData = async (data) => {
     }
 };
 
-
-export const getGradeData = async (enrollment_number) => {
+export const getGradeData = async () => {
     try {
         const response = await axios.get(
-            `http://127.0.0.1:8000/core/user_grade_analysis_data/${enrollment_number}/`, {
+            `http://127.0.0.1:8000/core/user_grade_analysis_data/${localStorage.getItem('user_enrollment_number')}/`, {
             headers: {
                 Authorization: `JWT ${localStorage.getItem('token')}`
             }

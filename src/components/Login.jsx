@@ -8,7 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState, useEffect } from "react";
-import { loginUser } from "../helper";
+import { getUser, loginUser } from "../helper";
 import { Snackbar, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -81,6 +81,15 @@ export default function SignIn({ isAuthenticated, toggleAuth }) {
         localStorage.setItem('token', response.data.access);
         setSeverity('success');
         setMessage('Login successful');
+        const me = await getUser();
+        console.log(me);
+
+        if (me.status === 200) {
+          localStorage.setItem('user_id', me.data.id);
+          localStorage.setItem('user_name', me.data.name);
+          localStorage.setItem('user_email', me.data.email);
+          localStorage.setItem('user_enrollment_number', me.data.enrollment_number);
+        }
         toggleAuth();
         navigate('/');
       } else {

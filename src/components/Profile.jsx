@@ -17,7 +17,7 @@ import { scroller } from "react-scroll";
 import { Tabs, Tab } from "@mui/material";
 import { InputLabel, Slider, FormHelperText } from "@mui/material";
 import { MenuItem, Select } from "@mui/material";
-import { getGradeData, sendGradeData, updateGradeData } from "../helper";
+import { getCareerData, getGradeData, sendCareerData, sendGradeData, updateCareerData, updateGradeData } from "../helper";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Snackbar, Alert } from '@mui/material';
 
@@ -112,6 +112,7 @@ const Profile = () => {
   const [failuresError, setFailuresError] = useState(false);
 
   const [dataIsAvailable, setDataIsAvailable] = useState(false);
+  const [careerDataIsAvailable, setCareerDataIsAvailable] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -986,6 +987,7 @@ const Profile = () => {
         if (response.status === 200) {
           setSeverity('success');
           setMessage('Data saved successfully!');
+          setDataIsAvailable(true);
         } else {
           setMessage('Something went wrong! ' + response.data.detail + ' ' + response.statusText);
           setSeverity('error');
@@ -1002,6 +1004,7 @@ const Profile = () => {
 
   useEffect(() => {
     getData();
+    getCareerAnalysisData();
   }, []);
 
   const getData = async () => {
@@ -1063,6 +1066,37 @@ const Profile = () => {
       setSemester(data.semester);
       setTimeSpentOnExtraActivities(data.time_spent_on_extracurricular_activities);
       setTimeSpentOnHomework(data.time_spent_on_homework);
+    }
+  }
+
+  const getCareerAnalysisData = async () => {
+    const response = await getCareerData();
+
+    if (response.status === 200) {
+      const data = response.data.data;
+
+      setCareerDataIsAvailable(true);
+
+      setLogicalQuotionRating(data.logical_quotient_rating);
+      setHackathons(data.hackathons);
+      setCodingSkillsRating(data.coding_skills_rating);
+      setPublicSpeakingPoints(data.public_speaking_points);
+      setSelfLearningCapability(data.self_learning_capability);
+      setExtraCourses(data.extra_courses_did);
+      setCertifications(data.certifications);
+      setWorkshops(data.workshops);
+      setReadingAndWritingSkills(data.reading_writing_skills);
+      setMemoryCapabilityScore(data.memory_capability_score);
+      setInterestedSubjects(data.interested_subjects);
+      setInterestedCareer(data.interested_career_area);
+      setTypeOfCompanyWantToSettle(data.type_of_company_want_to_settle_in);
+      setTakeInputsFromSeniors(data.taken_inputs_from_seniors_or_elders);
+      setInterestedTypeOfBooks(data.interested_type_of_books);
+      setManagementOrTechnical(data.management_or_technical);
+      setHardOrSmartWorker(data.hard_or_smart_worker);
+      setWorkedInTeam(data.worked_in_teams_ever);
+      setIntrovert(data.introvert);
+      // setSuggestedJobRole(data.suggested_job_role);
     }
   }
 
@@ -1350,18 +1384,82 @@ const Profile = () => {
       validateManagementOrTechnical() &&
       validateHardOrSmartWorker() &&
       validateWorkedInTeam() &&
-      validateIntrovert() &&
-      validateSuggestedJobRole()
-    ) {
+      validateIntrovert()) {
       return true;
     }
     return false;
   };
 
-  const handleSubmitCareer = (e) => {
+  const handleSubmitCareer = async (e) => {
     e.preventDefault();
     if (validateAll()) {
       console.log("All validations passed");
+
+      const data = {
+        logical_quotion_rating: logicalQuotionRating,
+        hackathons: hackathons,
+        coding_skills_rating: codingSkillsRating,
+        public_speaking_points: publicSpeakingPoints,
+        self_learning_capability: selfLearningCapability,
+        extra_courses_did: extraCourses,
+        certifications: certifications,
+        workshops: workshops,
+        reading_writing_skills: readingAndWritingSkills,
+        memory_capability_score: memoryCapabilityScore,
+        interested_subjects: interestedSubjects,
+        interested_career_area: interestedCareer,
+        type_of_company_want_to_settle_in: typeOfCompanyWantToSettle,
+        taken_inputs_from_seniors_or_elders: takeInputsFromSeniors,
+        interested_type_of_books: interestedTypeOfBooks,
+        management_or_technical: managementOrTechnical,
+        hard_or_smart_worker: hardOrSmartWorker,
+        worked_in_team: workedInTeam,
+        introvert: introvert,
+        suggested_job_role: "",
+      };
+
+      console.log(data);
+
+      setIsLoading(true);
+
+      if (careerDataIsAvailable) {
+        try {
+          const response = await updateCareerData(data);
+          console.log(response);
+          if (response.status === 200) {
+            setSeverity('success');
+            setMessage('Data updated successfully!');
+          } else {
+            setMessage('Something went wrong! ' + response.data.detail + ' ' + response.statusText);
+            setSeverity('error');
+          }
+        } catch (error) {
+          setSeverity('error');
+          setMessage('Something went wrong ' + error);
+        } finally {
+          handleOpen();
+          setIsLoading(false);
+        }
+      } else {
+        try {
+          const response = await sendCareerData(data);
+          console.log(response);
+          if (response.status === 201) {
+            setSeverity('success');
+            setMessage('Data saved successfully!');
+            setCareerDataIsAvailable(true);
+          } else {
+            setMessage('Something went wrong! ' + response.data.detail + ' ' + response.statusText);
+            setSeverity('error');
+          }
+        } catch (error) {
+          setSeverity('error');
+          setMessage('Something went wrong ' + error);
+        } finally {
+          handleOpen();
+          setIsLoading(false);
+        }
+      }
     }
   };
 

@@ -212,4 +212,101 @@ export const getGradeData = async () => {
     }
 };
 
+export const sendCareerData = async (data) => {
+    try {
+        const response = await axios.post(
+            'http://127.0.0.1:8000/core/user_career_analysis_data/',
+            {
+                user_id: localStorage.getItem('user_id'),
+                enrollment_number: localStorage.getItem('user_enrollment_number'),
+                logical_quotient_rating: data.logical_quotion_rating,
+                hackathons: data.hackathons,
+                coding_skills_rating: data.coding_skills_rating,
+                public_speaking_points: data.public_speaking_points,
+                self_learning_capability: data.self_learning_capability,
+                extra_courses_did: data.extra_courses_did,
+                certifications: data.certifications,
+                workshops: data.workshops,
+                reading_writing_skills: data.reading_writing_skills,
+                memory_capability_score: data.memory_capability_score,
+                interested_subjects: data.interested_subjects,
+                interested_career_area: data.interested_career_area,
+                type_of_company_want_to_settle_in: data.type_of_company_want_to_settle_in,
+                taken_inputs_from_seniors_or_elders: data.taken_inputs_from_seniors_or_elders,
+                interested_type_of_books: data.interested_type_of_books,
+                management_or_technical: data.management_or_technical,
+                hard_or_smart_worker: data.hard_or_smart_worker,
+                worked_in_teams_ever: data.worked_in_team,
+                introvert: data.introvert,
+                suggested_job_role: "",
+            },
+            {
+                headers: {
+                    Authorization: `JWT ${localStorage.getItem('token')}`
+                }
+            }
+        );
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+};
+
+export const updateCareerData = async (data) => {
+    try {
+        const response = await axios.put(
+            `http://127.0.0.1:8000/core/user_career_analysis_data/${localStorage.getItem('user_enrollment_number')}/`,
+            {
+                user_id: localStorage.getItem('user_id'),
+                enrollment_number: localStorage.getItem('user_enrollment_number'),
+                logical_quotient_rating: data.logical_quotion_rating,
+                hackathons: data.hackathons,
+                coding_skills_rating: data.coding_skills_rating,
+                public_speaking_points: data.public_speaking_points,
+                self_learning_capability: data.self_learning_capability,
+                extra_courses_did: data.extra_courses_did,
+                certifications: data.certifications,
+                workshops: data.workshops,
+                reading_writing_skills: data.reading_writing_skills,
+                memory_capability_score: data.memory_capability_score,
+                interested_subjects: data.interested_subjects,
+                interested_career_area: data.interested_career_area,
+                type_of_company_want_to_settle_in: data.type_of_company_want_to_settle_in,
+                taken_inputs_from_seniors_or_elders: data.taken_inputs_from_seniors_or_elders,
+                interested_type_of_books: data.interested_type_of_books,
+                management_or_technical: data.management_or_technical,
+                hard_or_smart_worker: data.hard_or_smart_worker,
+                worked_in_teams_ever: data.worked_in_team,
+                introvert: data.introvert,
+                suggested_job_role: "",
+            },
+            {
+                headers: {
+                    Authorization: `JWT ${localStorage.getItem('token')}`
+                }
+            }
+        );
+        return response;
+    } catch (error) {
+        return error.response;
+    }
+};
+
+
+export const getCareerData = async () => {
+    try {
+        const response = await axios.get(
+            `http://127.0.0.1:8000/core/user_career_analysis_data/${localStorage.getItem('user_enrollment_number')}/`, {
+            headers: {
+                Authorization: `JWT ${localStorage.getItem('token')}`
+            }
+        });
+        console.log(response);
+        return response;
+    } catch (error) {
+        console.log(error.response);
+        return error.response;
+    }
+};
+
 

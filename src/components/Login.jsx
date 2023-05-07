@@ -4,9 +4,14 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { loginUser } from "../helper";
+import { Snackbar, Alert } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 
 const theme = createTheme({
   typography: {
@@ -19,27 +24,78 @@ const theme = createTheme({
     },
   },
 });
-export default function SignIn() {
+export default function SignIn({ isAuthenticated, toggleAuth }) {
+  let navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState('success');
+  const [message, setMessage] = useState('');
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    console.log('Email error:', emailError);
+  }, [emailError]);
+
+  useEffect(() => {
+    console.log('Password error:', passwordError);
+  }, [passwordError]);
+
   const validateEmail = () => {
-    setEmailError(!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email));
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setEmailError(!emailRegex.test(email));
   };
 
   const validatePassword = () => {
-    setPasswordError(password.length < 6);
+    setPasswordError(password.length < 8);
   };
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    console.log({
-      email: email,
-      password: password,
-    });
+
+    // validate email and password inputs
+    validateEmail();
+    validatePassword();
+
+    // check if there are any errors
+    if (emailError || passwordError) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await loginUser(email, password);
+      console.log(response);
+
+      if (response.status === 200) {
+        localStorage.setItem('token', response.data.access);
+        setSeverity('success');
+        setMessage('Login successful');
+        toggleAuth();
+        navigate('/');
+      } else {
+        setMessage('Login failed ' + response.data.detail + ' ' + response.statusText);
+        setSeverity('error');
+      }
+    } catch (error) {
+      setSeverity('error');
+      setMessage('Login failed ' + error);
+    } finally {
+      handleOpen();
+      setIsLoading(false);
+    }
   };
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -72,6 +128,7 @@ export default function SignIn() {
             account.
           </Typography>
         </Box>
+
         <Box
           display="flex"
           flexDirection="column"
@@ -92,7 +149,7 @@ export default function SignIn() {
             helperText={emailError && "Please enter a valid email address."}
             color="primary"
             fullWidth
-            margin="normal"
+            style={{ marginTop: "16px", marginBottom: "16px" }}
             FormHelperTextProps={{
               sx: {
                 position: "absolute",
@@ -100,6 +157,7 @@ export default function SignIn() {
               },
             }}
           />
+
           <TextField
             label="Password"
             type="password"
@@ -112,7 +170,7 @@ export default function SignIn() {
             }
             color="primary"
             fullWidth
-            margin="normal"
+            style={{ marginTop: "16px", marginBottom: "16px" }}
             FormHelperTextProps={{
               sx: {
                 position: "absolute",
@@ -120,22 +178,33 @@ export default function SignIn() {
               },
             }}
           />
+
           <Button
             variant="contained"
             color="primary"
             onClick={(event) => {
-              validateEmail();
-              validatePassword();
-              if (!emailError && !passwordError) {
-                handleSubmit(event);
-              }
+              handleSubmit(event);
             }}
             fullWidth
+            disabled={isLoading} // disable the button while loading
             sx={{ marginTop: "16px" }}
           >
-            Login
+            {isLoading ? <CircularProgress size={24} /> : 'Login'}
           </Button>
+
+
         </Box>
+
+        <Snackbar
+          open={open}
+          autoHideDuration={5000} // How long the toast should stay open, in ms
+          onClose={handleClose}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} // The position of the toast on the screen
+        >
+          <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
+            {message}
+          </Alert>
+        </Snackbar>
       </Container>
     </ThemeProvider>
   );

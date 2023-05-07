@@ -13,11 +13,23 @@ import Analysis from "./components/Analysis";
 import Footer from "./components/Footer";
 import SideBar from "./components/SideBar";
 import UpdatedNavBar from "./components/UpdatedNavBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const toggleAuth = () => {
+    setIsAuthenticated(!isAuthenticated);
+  };
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -31,12 +43,12 @@ function App() {
     <>
       <SideBar isOpen={isOpen} toogle={toggle} />
       {/* <NavBar toogle={toggle} /> */}
-      <UpdatedNavBar toggle={toggle} IsLogin={isLogin} login={login} />
+      <UpdatedNavBar isAuthenticated={isAuthenticated} toggleAuth={toggleAuth} toggle={toggle} IsLogin={isLogin} login={login} />
       <body>
         <Routes>
           <Route path="/" element={<Home />} />
 
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login isAuthenticated={isAuthenticated} toggleAuth={toggleAuth} />} />
 
           <Route path="/signup" element={<Signup />} />
 

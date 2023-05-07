@@ -26,12 +26,16 @@ const theme = createTheme({
   },
 });
 export default function SignIn() {
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [enrollmentNumber, setEnrollmentNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const [usernameError, setUsernameError] = useState(false);
+  const [nameError, setNameError] = useState(false);
+  const [enrollmentNumberError, setEnrollmentNumberError] = useState(false);
+  const [rePasswordError, setRePasswordError] = useState(false);
 
   const validateEmail = () => {
     setEmailError(!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email));
@@ -41,8 +45,16 @@ export default function SignIn() {
     setPasswordError(password.length < 6);
   };
 
-  const validateUsername = () => {
-    setUsernameError(!/^[a-zA-Z0-9]+$/.test(username));
+  const validateName = () => {
+    setNameError(!/^[a-zA-Z ]+$/.test(name));
+  };
+
+  const validateEnrollmentNumber = () => {
+    setEnrollmentNumberError(!/^[0-9]+$/.test(enrollmentNumber));
+  };
+
+  const validateRePassword = () => {
+    setRePasswordError(rePassword !== password || rePassword.length < 6);
   };
 
   const handleSubmit = (event) => {
@@ -53,6 +65,7 @@ export default function SignIn() {
       password: password,
     });
   };
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -93,19 +106,39 @@ export default function SignIn() {
           flexGrow={1}
         >
           <Typography variant="h5" align="center" color="textPrimary">
-            Signup
+            Create Account
           </Typography>
+
           <TextField
-            label="Username"
+            label="Name"
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            onBlur={validateUsername}
-            error={usernameError}
-            helperText={usernameError && "Please enter a valid username."}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onBlur={validateName}
+            error={nameError}
+            helperText={nameError && "Please enter a valid name."}
             color="primary"
             fullWidth
-            margin="normal"
+            FormHelperTextProps={{
+              sx: {
+                position: "absolute",
+                top: "100%",
+              },
+            }}
+            style={{ marginTop: "16px", marginBottom: "16px" }}
+          />
+
+          <TextField
+            label="Enrollment Number"
+            type="number"
+            value={enrollmentNumber}
+            onChange={(e) => setEnrollmentNumber(e.target.value)}
+            onBlur={validateEnrollmentNumber}
+            error={enrollmentNumberError}
+            helperText={enrollmentNumberError && "Please enter a valid enrollment number."}
+            color="primary"
+            fullWidth
+            style={{ marginTop: "16px", marginBottom: "16px" }}
             FormHelperTextProps={{
               sx: {
                 position: "absolute",
@@ -113,6 +146,7 @@ export default function SignIn() {
               },
             }}
           />
+
           <TextField
             label="Email"
             type="email"
@@ -123,7 +157,7 @@ export default function SignIn() {
             helperText={emailError && "Please enter a valid email address."}
             color="primary"
             fullWidth
-            margin="normal"
+            style={{ marginTop: "16px", marginBottom: "16px" }}
             FormHelperTextProps={{
               sx: {
                 position: "absolute",
@@ -131,6 +165,7 @@ export default function SignIn() {
               },
             }}
           />
+
           <TextField
             label="Password"
             type="password"
@@ -143,7 +178,7 @@ export default function SignIn() {
             }
             color="primary"
             fullWidth
-            margin="normal"
+            style={{ marginTop: "16px", marginBottom: "16px" }}
             FormHelperTextProps={{
               sx: {
                 position: "absolute",
@@ -151,21 +186,51 @@ export default function SignIn() {
               },
             }}
           />
+
+          <TextField
+            label="Re-enter Password"
+            type="password"
+            value={rePassword}
+            onChange={(e) => setRePassword(e.target.value)}
+            onBlur={validateRePassword}
+            error={rePasswordError}
+            helperText={
+              rePasswordError && "Password did not match."
+            }
+            color="primary"
+            fullWidth
+            style={{ marginTop: "16px", marginBottom: "16px" }}
+            FormHelperTextProps={{
+              sx: {
+                position: "absolute",
+                top: "100%",
+              },
+            }}
+          />
+
           <Button
             variant="contained"
             color="primary"
             onClick={(event) => {
               validateEmail();
               validatePassword();
-              validateUsername();
-              if (!emailError && !passwordError) {
+              validateName();
+              validateEnrollmentNumber();
+              validateRePassword();
+              if (
+                !emailError &&
+                !passwordError &&
+                !nameError &&
+                !enrollmentNumberError &&
+                !rePasswordError
+              ) {
                 handleSubmit(event);
               }
             }}
             fullWidth
             sx={{ marginTop: "16px" }}
           >
-            Signup
+            Login
           </Button>
         </Box>
       </Container>

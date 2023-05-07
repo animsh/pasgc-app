@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { FaBars } from "react-icons/fa";
 import {
   Nav,
@@ -11,10 +11,15 @@ import {
   NavBtn,
   NavBtnLink,
 } from "./js/UpdatedNavBarElements";
+import { checkToken } from "../helper";
 
-const UpdatedNavBar = ({ toggle, IsLogin, login }) => {
-  console.log(toggle);
-  let isAuthenthicated = true;
+const UpdatedNavBar = ({ isAuthenticated, toggleAuth, toggle, IsLogin, login }) => {
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    toggleAuth();
+  };
+
   return (
     <>
       <Nav>
@@ -24,7 +29,7 @@ const UpdatedNavBar = ({ toggle, IsLogin, login }) => {
             <FaBars />
           </MobileIcon>
           <NavMenu>
-            {isAuthenthicated && (
+            {isAuthenticated && (
               <>
                 <NavItem>
                   <NavLinks to="/">Home</NavLinks>
@@ -44,7 +49,7 @@ const UpdatedNavBar = ({ toggle, IsLogin, login }) => {
               <NavLinks to="/about">About</NavLinks>
             </NavItem>
 
-            {!isAuthenthicated && (
+            {!isAuthenticated && (
               <>
                 {!IsLogin && (
                   <NavBtn onClick={login}>
@@ -59,6 +64,12 @@ const UpdatedNavBar = ({ toggle, IsLogin, login }) => {
                   </NavBtn>
                 )}
               </>
+            )}
+
+            {isAuthenticated && (
+              <NavBtn onClick={handleLogout}>
+                <NavBtnLink to="/">Logout</NavBtnLink>
+              </NavBtn>
             )}
           </NavMenu>
         </NavbarContainer>

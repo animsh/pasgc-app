@@ -108,23 +108,23 @@ const Profile = () => {
   const [failuresError, setFailuresError] = useState(false);
 
   const genderOptions = [
-    { value: 1, label: "Male" },
-    { value: 0, label: "Female" },
-  ];
-
-  const addressOptions = [
-    { value: 0, label: "Urban" },
-    { value: 1, label: "Rural" },
+    { value: "male", label: "Male" },
+    { value: "female", label: "Female" },
   ];
 
   const familySizeOptions = [
-    { value: 0, label: "Less than 3" },
-    { value: 1, label: "Greater than 3" },
+    { value: "LE3", label: "Less than 3" },
+    { value: "GT3", label: "Greater than 3" },
   ];
 
   const parentStatusOptions = [
-    { value: 0, label: "Together" },
-    { value: 1, label: "Apart" },
+    { value: "T", label: "Together" },
+    { value: "A", label: "Apart" },
+  ];
+
+  const addressOptions = [
+    { value: "U", label: "Urban" },
+    { value: "R", label: "Rural" },
   ];
 
   const educationOptions = [
@@ -135,24 +135,24 @@ const Profile = () => {
   ];
 
   const jobOptions = [
-    { value: 1, label: "Teacher" },
-    { value: 2, label: "Health" },
-    { value: 3, label: "Services" },
-    { value: 4, label: "At Home" },
-    { value: 5, label: "Other" },
+    { value: "teacher", label: "Teacher" },
+    { value: "health", label: "Health" },
+    { value: "services", label: "Services" },
+    { value: "at_home", label: "At Home" },
+    { value: "other", label: "Other" },
   ];
 
   const reasonOptions = [
-    { value: 1, label: "Home" },
-    { value: 2, label: "Reputation" },
-    { value: 3, label: "Course" },
-    { value: 4, label: "Other" },
+    { value: "home", label: "Home" },
+    { value: "reputation", label: "Reputation" },
+    { value: "course", label: "Course" },
+    { value: "other", label: "Other" },
   ];
 
   const guardianOptions = [
-    { value: 1, label: "Mother" },
-    { value: 2, label: "Father" },
-    { value: 3, label: "Other" },
+    { value: "mother", label: "Mother" },
+    { value: "father", label: "Father" },
+    { value: "other", label: "Other" },
   ];
 
   const travelTimeOptions = [
@@ -170,8 +170,8 @@ const Profile = () => {
   ];
 
   const yesNoOptions = [
-    { value: 0, label: "No" },
-    { value: 1, label: "Yes" },
+    { value: "no", label: "No" },
+    { value: "yes", label: "Yes" },
   ];
 
   const veryBadToVeryGoodOptions = [

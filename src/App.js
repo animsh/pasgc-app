@@ -50,7 +50,7 @@ function App() {
 
           <Route path="/login" element={<Login isAuthenticated={isAuthenticated} toggleAuth={toggleAuth} />} />
 
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup isAuthenticated={isAuthenticated} toggleAuth={toggleAuth} login={login} />} />
 
           <Route path="/profile" element={<Profile />} />
 

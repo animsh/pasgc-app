@@ -1,18 +1,17 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
+
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
+import { Snackbar, Alert } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import CircularProgress from "@mui/material/CircularProgress";
+import { createUser } from "../helper";
 
 const theme = createTheme({
   typography: {
@@ -25,7 +24,10 @@ const theme = createTheme({
     },
   },
 });
-export default function SignIn() {
+
+export default function Signup({ isAuthenticated, toggleAuth, login }) {
+  let navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [enrollmentNumber, setEnrollmentNumber] = useState("");
@@ -36,6 +38,15 @@ export default function SignIn() {
   const [nameError, setNameError] = useState(false);
   const [enrollmentNumberError, setEnrollmentNumberError] = useState(false);
   const [rePasswordError, setRePasswordError] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState('success');
+  const [message, setMessage] = useState('');
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const validateEmail = () => {
     setEmailError(!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email));
@@ -57,13 +68,43 @@ export default function SignIn() {
     setRePasswordError(rePassword !== password || rePassword.length < 6);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    console.log({
-      email: email,
-      password: password,
-    });
+
+    validateEmail();
+    validatePassword();
+    validateName();
+    validateEnrollmentNumber();
+    validateRePassword();
+
+    if (emailError || passwordError || nameError || enrollmentNumberError || rePasswordError) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await createUser(name, email, enrollmentNumber, password, rePassword);
+      console.log(response);
+
+      if (response.status === 201) {
+        localStorage.setItem('token', response.data.access);
+        setSeverity('success');
+        setMessage('Account created successfully');
+        // toggleAuth();
+        login();
+        navigate('/login');
+      } else {
+        setMessage('Account creation failed ' + response.data.detail + ' ' + response.statusText);
+        setSeverity('error');
+      }
+    } catch (error) {
+      setSeverity('error');
+      setMessage('Account creation failed ' + error);
+    } finally {
+      handleOpen();
+      setIsLoading(false);
+    }
   };
 
 
@@ -212,27 +253,26 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             onClick={(event) => {
-              validateEmail();
-              validatePassword();
-              validateName();
-              validateEnrollmentNumber();
-              validateRePassword();
-              if (
-                !emailError &&
-                !passwordError &&
-                !nameError &&
-                !enrollmentNumberError &&
-                !rePasswordError
-              ) {
-                handleSubmit(event);
-              }
+              handleSubmit(event);
             }}
             fullWidth
+            disabled={isLoading} // disable the button while loading
             sx={{ marginTop: "16px" }}
           >
-            Login
+            {isLoading ? <CircularProgress size={24} /> : 'Signup'}
           </Button>
         </Box>
+
+        <Snackbar
+          open={open}
+          autoHideDuration={5000} // How long the toast should stay open, in ms
+          onClose={handleClose}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} // The position of the toast on the screen
+        >
+          <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
+            {message}
+          </Alert>
+        </Snackbar>
       </Container>
     </ThemeProvider>
   );

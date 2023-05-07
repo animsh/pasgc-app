@@ -24,6 +24,7 @@ const theme = createTheme({
     },
   },
 });
+
 export default function SignIn({ isAuthenticated, toggleAuth }) {
   let navigate = useNavigate();
 

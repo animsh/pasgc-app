@@ -12,19 +12,17 @@ export const checkToken = () => {
     }
 }
 
-export const createUser = async () => {
+export const createUser = async (name, email, enrollment_number, password, re_password) => {
     try {
         const response = await axios.post('http://127.0.0.1:8000/auth/users/', {
-            name: 'Sagar More',
-            email: 'animsh.more@gmail.com',
-            enrollment_number: 1002,
-            password: 'Animesh@7800',
-            re_password: 'Animesh@7800'
+            name: name,
+            email: email,
+            enrollment_number: enrollment_number,
+            password: password,
+            re_password: re_password
         });
-        console.log(response.data);
         return response;
     } catch (error) {
-        console.error(error.response.status);
         return error.response;
     }
 };

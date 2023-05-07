@@ -108,129 +108,134 @@ const Profile = () => {
   const [failuresError, setFailuresError] = useState(false);
 
   const genderOptions = [
-    { value: "male", label: "Male" },
-    { value: "female", label: "Female" },
+    { value: 1, label: "Male" },
+    { value: 0, label: "Female" },
+  ];
+
+  const addressOptions = [
+    { value: 0, label: "Urban" },
+    { value: 1, label: "Rural" },
   ];
 
   const familySizeOptions = [
-    { value: "LE3", label: "Less than 3" },
-    { value: "GT3", label: "Greater than 3" },
+    { value: 0, label: "Less than 3" },
+    { value: 1, label: "Greater than 3" },
   ];
 
   const parentStatusOptions = [
-    { value: "T", label: "Together" },
-    { value: "A", label: "Apart" },
+    { value: 0, label: "Together" },
+    { value: 1, label: "Apart" },
   ];
 
   const educationOptions = [
-    { value: "0", label: "None" },
-    { value: "1", label: "Primary" },
-    { value: "2", label: "Secondary" },
-    { value: "3", label: "Higher" },
+    { value: 0, label: "None" },
+    { value: 1, label: "Primary" },
+    { value: 2, label: "Secondary" },
+    { value: 3, label: "Higher" },
   ];
 
   const jobOptions = [
-    { value: "teacher", label: "Teacher" },
-    { value: "health", label: "Health" },
-    { value: "services", label: "Services" },
-    { value: "at_home", label: "At Home" },
-    { value: "other", label: "Other" },
+    { value: 1, label: "Teacher" },
+    { value: 2, label: "Health" },
+    { value: 3, label: "Services" },
+    { value: 4, label: "At Home" },
+    { value: 5, label: "Other" },
   ];
 
   const reasonOptions = [
-    { value: "home", label: "Home" },
-    { value: "reputation", label: "Reputation" },
-    { value: "course", label: "Course" },
-    { value: "other", label: "Other" },
+    { value: 1, label: "Home" },
+    { value: 2, label: "Reputation" },
+    { value: 3, label: "Course" },
+    { value: 4, label: "Other" },
   ];
 
   const guardianOptions = [
-    { value: "mother", label: "Mother" },
-    { value: "father", label: "Father" },
-    { value: "other", label: "Other" },
+    { value: 1, label: "Mother" },
+    { value: 2, label: "Father" },
+    { value: 3, label: "Other" },
   ];
 
   const travelTimeOptions = [
-    { value: "1", label: "<15 min" },
-    { value: "2", label: "15-30 min" },
-    { value: "3", label: "30-60 min" },
-    { value: "4", label: ">60 min" },
+    { value: 1, label: "<15 min" },
+    { value: 2, label: "15-30 min" },
+    { value: 3, label: "30-60 min" },
+    { value: 4, label: ">60 min" },
   ];
 
   const studyTimeOptions = [
-    { value: "1", label: "<2 hours" },
-    { value: "2", label: "2-5 hours" },
-    { value: "3", label: "5-10 hours" },
-    { value: "4", label: ">10 hours" },
+    { value: 1, label: "<2 hours" },
+    { value: 2, label: "2-5 hours" },
+    { value: 3, label: "5-10 hours" },
+    { value: 4, label: ">10 hours" },
   ];
 
   const yesNoOptions = [
-    { value: "no", label: "No" },
-    { value: "yes", label: "Yes" },
+    { value: 0, label: "No" },
+    { value: 1, label: "Yes" },
   ];
 
   const veryBadToVeryGoodOptions = [
-    { value: "1", label: "Very Bad" },
-    { value: "2", label: "Bad" },
-    { value: "3", label: "Neutral" },
-    { value: "4", label: "Good" },
-    { value: "5", label: "Very Good" },
+    { value: 1, label: "Very Bad" },
+    { value: 2, label: "Bad" },
+    { value: 3, label: "Neutral" },
+    { value: 4, label: "Good" },
+    { value: 5, label: "Very Good" },
   ];
 
   const veryLowToVeryHighOptions = [
-    { value: "1", label: "Very Low" },
-    { value: "2", label: "Low" },
-    { value: "3", label: "Average/Moderate" },
-    { value: "4", label: "High" },
-    { value: "5", label: "Very High" },
+    { value: 1, label: "Very Low" },
+    { value: 2, label: "Low" },
+    { value: 3, label: "Average/Moderate" },
+    { value: 4, label: "High" },
+    { value: 5, label: "Very High" },
   ];
 
   const veryRareToVeryFrequntOptions = [
-    { value: "1", label: "Very Rare" },
-    { value: "2", label: "Rare" },
-    { value: "3", label: "Average" },
-    { value: "4", label: "Frequent" },
-    { value: "5", label: "Very Frequent" },
+    { value: 1, label: "Very Rare" },
+    { value: 2, label: "Rare" },
+    { value: 3, label: "Average" },
+    { value: 4, label: "Frequent" },
+    { value: 5, label: "Very Frequent" },
   ];
 
   const veryBadToExcellentOptions = [
-    { value: "1", label: "Very Poor" },
-    { value: "2", label: "Poor" },
-    { value: "3", label: "Average" },
-    { value: "4", label: "Good" },
-    { value: "5", label: "Excellent" },
+    { value: 1, label: "Very Poor" },
+    { value: 2, label: "Poor" },
+    { value: 3, label: "Average" },
+    { value: 4, label: "Good" },
+    { value: 5, label: "Excellent" },
   ];
 
   const veryNegativeToVeryPositiveOptions = [
-    { value: "1", label: "Very Negative" },
-    { value: "2", label: "Negative" },
-    { value: "3", label: "Neutral" },
-    { value: "4", label: "Positive" },
-    { value: "5", label: "Very Positive" },
+    { value: 1, label: "Very Negative" },
+    { value: 2, label: "Negative" },
+    { value: 3, label: "Neutral" },
+    { value: 4, label: "Positive" },
+    { value: 5, label: "Very Positive" },
   ];
 
   const veryInsufficientToVerySufficientOptions = [
-    { value: "1", label: "Very Insufficient" },
-    { value: "2", label: "Insufficient" },
-    { value: "3", label: "Neutral" },
-    { value: "4", label: "Sufficient" },
-    { value: "5", label: "Very Sufficient" },
+    { value: 1, label: "Very Insufficient" },
+    { value: 2, label: "Insufficient" },
+    { value: 3, label: "Neutral" },
+    { value: 4, label: "Sufficient" },
+    { value: 5, label: "Very Sufficient" },
   ];
 
   const neverToAlwaysOptions = [
-    { value: "1", label: "Never" },
-    { value: "2", label: "Rarely" },
-    { value: "3", label: "Sometimes" },
-    { value: "4", label: "Often" },
-    { value: "5", label: "Always" },
+    { value: 1, label: "Never" },
+    { value: 2, label: "Rarely" },
+    { value: 3, label: "Sometimes" },
+    { value: 4, label: "Often" },
+    { value: 5, label: "Always" },
   ];
 
   const veryLightToVeryHeavyOptions = [
-    { value: "1", label: "Very Light" },
-    { value: "2", label: "Light" },
-    { value: "3", label: "Neutral" },
-    { value: "4", label: "Heavy" },
-    { value: "5", label: "Very Heavy" },
+    { value: 1, label: "Very Light" },
+    { value: 2, label: "Light" },
+    { value: 3, label: "Neutral" },
+    { value: 4, label: "Heavy" },
+    { value: 5, label: "Very Heavy" },
   ];
 
   const validateName = () => {
@@ -243,6 +248,13 @@ const Profile = () => {
 
   const validateAge = () => {
     setAgeError(!age.trim());
+  };
+
+  const validateAddress = () => {
+    console.log(!address.trim());
+    if (!address.trim()) {
+      alert("Please select ADDRESS!");
+    }
   };
 
   const validateSex = () => {
@@ -614,6 +626,10 @@ const Profile = () => {
     setEnrollmentNumber(e.target.value);
   };
 
+  const handleAddressChange = (e) => {
+    setAddress(e.target.value);
+  };
+
   const handleAgeChange = (e) => {
     setAge(e.target.value);
   };
@@ -810,6 +826,7 @@ const Profile = () => {
     e.preventDefault();
     validateName();
     validateEnrollmentNumber();
+    validateAddress();
     validateAge();
     validateSex();
     validateFamilySize();
@@ -1193,13 +1210,13 @@ const Profile = () => {
   };
 
   const selfLearningCapabilityOptions = [
-    { value: "yes", label: "Yes" },
-    { value: "no", label: "No" },
+    { value: "Yes", label: "Yes" },
+    { value: "No", label: "No" },
   ];
 
   const extraCoursesOptions = [
-    { value: "yes", label: "Yes" },
-    { value: "no", label: "No" },
+    { value: "Yes", label: "Yes" },
+    { value: "No", label: "No" },
   ];
 
   const certificationsOptions = [
@@ -1207,7 +1224,6 @@ const Profile = () => {
     { value: "information security", label: "Information Security" },
     { value: "app development", label: "App Development" },
     { value: "full stack", label: "Full Stack" },
-    { value: "None", label: "None" },
     { value: "distro making", label: "Distro Making" },
     { value: "hadoop", label: "Hadoop" },
     { value: "r programming", label: "R Programming" },
@@ -1218,10 +1234,9 @@ const Profile = () => {
   const workshopsOptions = [
     { value: "cloud computing", label: "Cloud Computing" },
     { value: "web technologies", label: "Web Technologies" },
-    { value: "None", label: "None" },
     { value: "data science", label: "Data Science" },
     { value: "hacking", label: "Hacking" },
-    { value: "testing", label: "Testing" },
+    { value: "Testing", label: "Testing" },
     { value: "database security", label: "Database Security" },
     { value: "system designing", label: "System Designing" },
     { value: "game development", label: "Game Development" },
@@ -1243,7 +1258,6 @@ const Profile = () => {
     { value: "Software Engineering", label: "Software Engineering" },
     { value: "IOT", label: "IOT" },
     { value: "data engineering", label: "Data Engineering" },
-    { value: "None", label: "None" },
     { value: "networks", label: "Networks" },
     { value: "hacking", label: "Hacking" },
     { value: "Management", label: "Management" },
@@ -1255,7 +1269,6 @@ const Profile = () => {
   const interestedCareerAreaOptions = [
     { value: "developer", label: "Developer" },
     { value: "cloud computing", label: "Cloud Computing" },
-    { value: "None", label: "None" },
     { value: "testing", label: "Testing" },
     { value: "security", label: "Security" },
     { value: "system developer", label: "System Developer" },
@@ -1269,7 +1282,6 @@ const Profile = () => {
     { value: "Web Services", label: "Web Services" },
     { value: "Service Based", label: "Service Based" },
     { value: "Finance", label: "Finance" },
-    { value: "None", label: "None" },
     {
       value: "Testing and Maintenance Services",
       label: "Testing and Maintenance Services",
@@ -1280,8 +1292,8 @@ const Profile = () => {
   ];
 
   const inputsFromSeniorsOptions = [
-    { value: "no", label: "No" },
-    { value: "yes", label: "Yes" },
+    { value: "No", label: "No" },
+    { value: "Yes", label: "Yes" },
   ];
 
   const interestedBookTypesOptions = [
@@ -1324,18 +1336,18 @@ const Profile = () => {
   ];
 
   const hardOrSmartWorkerOptions = [
-    { value: "smart worker", label: "Smart Worker" },
-    { value: "hard worker", label: "Hard Worker" },
+    { value: "Smart worker", label: "Smart Worker" },
+    { value: "Hard Worker", label: "Hard Worker" },
   ];
 
   const workedInTeamsOptions = [
-    { value: "yes", label: "Yes" },
-    { value: "no", label: "No" },
+    { value: "Yes", label: "Yes" },
+    { value: "No", label: "No" },
   ];
 
   const introvertOptions = [
-    { value: "no", label: "No" },
-    { value: "yes", label: "Yes" },
+    { value: "No", label: "No" },
+    { value: "Yes", label: "Yes" },
   ];
 
   return (
@@ -1488,6 +1500,27 @@ const Profile = () => {
                 }}
                 type="number"
               />
+
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <FormLabel component="legend" style={{ marginBottom: "8px" }}>
+                  What is your address type?
+                </FormLabel>
+                <Select
+                  labelId="dropdown-label"
+                  id="dropdown"
+                  value={address}
+                  onChange={handleAddressChange}
+                >
+                  {addressOptions.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
               <FormControl
                 fullWidth

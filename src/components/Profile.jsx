@@ -2818,7 +2818,7 @@ const Profile = () => {
                 </FormLabel>
                 <Slider
                   id="slider"
-                  defaultValue={1}
+                  defaultValue={logicalQuotionRating}
                   valueLabelDisplay="auto"
                   step={1}
                   marks
@@ -2839,7 +2839,7 @@ const Profile = () => {
                 </FormLabel>
                 <Slider
                   id="slider"
-                  defaultValue={1}
+                  defaultValue={hackathons}
                   valueLabelDisplay="auto"
                   step={1}
                   marks
@@ -2860,7 +2860,7 @@ const Profile = () => {
                 </FormLabel>
                 <Slider
                   id="slider"
-                  defaultValue={1}
+                  defaultValue={codingSkillsRating}
                   valueLabelDisplay="auto"
                   step={1}
                   marks
@@ -2886,7 +2886,7 @@ const Profile = () => {
                   defaultValue={0}
                   valueLabelDisplay="auto"
                   step={1}
-                  onChange={handlePublicSpeakingPointsChange}
+                  onChange={publicSpeakingPoints}
                   marks
                   min={1}
                   max={9}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { styled } from '@mui/material/styles';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
@@ -7,6 +7,7 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Paper from '@mui/material/Paper';
+import { convertToOutOf, getCareerAnalysisResult, getGradeAnalysisResult, getMarks, getOccurance } from "../helper";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -33,7 +34,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-const Analysis = () => {
+export default function Analysis() {
 
   const theme = createTheme({
     typography: {
@@ -47,23 +48,9 @@ const Analysis = () => {
     },
   });
 
-  const data = [
-    ["Subject", "Part"],
-    ["Predicted Career", 2],
-    ["Eat", 1],
-  ];
+  const [data, setData] = useState([]);
 
-  const subjects = [
-    {
-      name: "Subject 1",
-      marks: 50,
-    },
-
-    {
-      name: "Subject 2",
-      marks: 50,
-    },
-  ]
+  const [subjects, setSubject] = useState([])
 
   const options = {
     backgroundColor: '#121212', // set background color
@@ -72,6 +59,43 @@ const Analysis = () => {
     pieHole: 0.1,
     is3D: true,
   };
+
+  useEffect(() => {
+    getUserCareerAnalysisResult();
+    getUserGradeAnalysisResult();
+  }, []);
+
+  const getUserCareerAnalysisResult = async () => {
+    const response = await getCareerAnalysisResult();
+    // console.log(response);
+
+    if (response.status === 200) {
+      console.log("Success");
+      const data = response.data;
+      const careerList = data.data
+      const updatedCareerList = getOccurance(careerList);
+      setData(updatedCareerList);
+    } else {
+      console.log("Failed");
+    }
+  }
+
+  const getUserGradeAnalysisResult = async () => {
+    const response = await getGradeAnalysisResult();
+    // console.log(response);
+
+    if (response.status === 200) {
+      console.log("Success");
+      const data = response.data;
+      const gradeList = data.data
+      console.log(gradeList);
+      setSubject(getMarks(gradeList));
+      console.log(subjects);
+    } else {
+      console.log("Failed");
+    }
+  }
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -91,14 +115,19 @@ const Analysis = () => {
           <Typography variant="body1" >
             Carrer Prediction
           </Typography>
-          <Chart
+
+          {data.length === 0 && <Typography variant="body2" gutterBottom>
+            No data available
+          </Typography>}
+
+          {data.length > 0 && <Chart
             chartType="PieChart"
             width="100%"
             height="400px"
             data={data}
             options={options}
             style={{ backgroundColor: "#121212" }}
-          />
+          />}
 
           {
             data.slice(1).map((career) => {
@@ -106,7 +135,7 @@ const Analysis = () => {
                 <>
                   <Paper elevation={3} sx={{ p: 2, borderRadius: 4, borderWidth: 2, marginBottom: "16px" }}>
                     <Typography variant="body1" gutterBottom>
-                      Title
+                      {career[0]}
                     </Typography>
                     <Typography variant="body2" gutterBottom>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus arcu ac mauris vestibulum, vel dignissim libero bibendum. Pellentesque aliquam turpis ut leo dignissim, vel efficitur felis faucibus. Suspendisse eget velit vel velit ultricies aliquam.
@@ -122,22 +151,24 @@ const Analysis = () => {
             Grade Prediction
           </Typography>
 
-          {subjects.map((subject) => {
+          {subjects.length != 0 && subjects.map((subject) => {
             return (
               <div style={{ width: "100%", marginTop: "16px" }}>
                 <Typography variant="body1" >
-                  {subject.name}
+                  {subject} out of 70
                 </Typography>
-                <BorderLinearProgress variant="determinate" value={subject.marks} />
+                <BorderLinearProgress variant="determinate" value={convertToOutOf(subject, 70)} />
               </div>
             )
-          })
-          }
+          })}
+
+          {subjects.length === 0 && <Typography variant="body2" gutterBottom>
+            No data available
+          </Typography>}
+
         </div>
 
       </Container>
     </ThemeProvider>
   );
 };
-
-export default Analysis;

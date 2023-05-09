@@ -301,12 +301,84 @@ export const getCareerData = async () => {
                 Authorization: `JWT ${localStorage.getItem('token')}`
             }
         });
-        console.log(response);
+        // console.log(response);
         return response;
     } catch (error) {
-        console.log(error.response);
+        // console.log(error.response);
         return error.response;
     }
 };
 
 
+export const getCareerAnalysisResult = async () => {
+    try {
+        const response = await axios.get(
+            `http://127.0.0.1:8000/core/user_career_analysis_result/${localStorage.getItem('user_enrollment_number')}/`, {
+            headers: {
+                Authorization: `JWT ${localStorage.getItem('token')}`
+            }
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        // console.log(error.response);
+        return error.response;
+    }
+};
+
+export const getGradeAnalysisResult = async () => {
+    try {
+        const response = await axios.get(
+            `http://127.0.0.1:8000/core/user_grade_analysis_result/${localStorage.getItem('user_enrollment_number')}/`, {
+            headers: {
+                Authorization: `JWT ${localStorage.getItem('token')}`
+            }
+        });
+        // console.log(response);
+        return response;
+    } catch (error) {
+        // console.log(error.response);
+        return error.response;
+    }
+};
+
+export const getMarks = (arr) => {
+    let result = [];
+    for (let i = 0; i < arr['first'].length; i++) {
+        result.push((parseInt(arr['first'][i])
+            + parseInt(arr['second'][i])
+            + parseInt(arr['third'][i])
+            + parseInt(arr['fourth'][i])
+            + parseInt(arr['fifth'][i])) / 5)
+    }
+    console.log(result);
+    return result;
+};
+
+
+export const getOccurance = (arr) => {
+    const map = new Map();
+
+    // Iterate over the array and count the occurrences of each value
+    for (let val of arr) {
+        if (map.has(val)) {
+            map.set(val[0], map.get(val) + 1);
+        } else {
+            map.set(val[0], 1);
+        }
+    }
+
+    // Convert the map to an array of key-value pairs
+    const result = Array.from(map.entries());
+    const updatedResult = [['Career', 'Occurance']];
+    for (let i = 0; i < result.length; i++) {
+        updatedResult.push([[result[i][0]][0], result[i][1]]);
+    }
+    console.log(updatedResult);
+    return updatedResult;
+};
+
+export function convertToOutOf(value, outOf) {
+    console.log((value / outOf) * 100);
+    return (value / outOf) * 100;
+}

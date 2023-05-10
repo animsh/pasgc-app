@@ -12,6 +12,10 @@ import {
   NavBtnLink,
 } from "./js/UpdatedNavBarElements";
 import { checkToken } from "../helper";
+import logo from "../logo_one.svg";
+
+// let logo = require("../logo_one.svg");
+// console.log(logo);
 
 const UpdatedNavBar = ({ isAuthenticated, toggleAuth, toggle, IsLogin, login }) => {
 
@@ -28,7 +32,7 @@ const UpdatedNavBar = ({ isAuthenticated, toggleAuth, toggle, IsLogin, login }) 
     <>
       <Nav>
         <NavbarContainer>
-          <NavLogo to="/">Logo</NavLogo>
+          <NavLogo to="/"> <img src={logo} width="50px" alt="" /> </NavLogo>
           <MobileIcon onClick={toggle}>
             <FaBars />
           </MobileIcon>

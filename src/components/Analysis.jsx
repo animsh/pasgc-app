@@ -157,7 +157,7 @@ export default function Analysis() {
                 <Typography variant="body1" >
                   {subject[0]} {subject[1]} out of 70
                 </Typography>
-                <BorderLinearProgress variant="determinate" value={convertToOutOf(subject[1], 70)} />
+                <BorderLinearProgress variant="determinate" value={(subject[1] / 70) * 100} />
               </div>
             )
           })}

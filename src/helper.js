@@ -86,7 +86,7 @@ export const sendGradeData = async (data) => {
                 go_out: data.go_out,
                 health: data.health,
                 absences: data.absences,
-                mid_sem_marks: data.mid_sem_marks,
+                mid_sem_marks: embedMarks(data.mid_sem_marks, 30, 100),
                 end_sem_marks: data.end_sem_marks,
                 attendance_rate: data.attendance_rate,
                 class_participation: data.class_participation,
@@ -158,7 +158,7 @@ export const updateGradeData = async (data) => {
                 go_out: data.go_out,
                 health: data.health,
                 absences: data.absences,
-                mid_sem_marks: data.mid_sem_marks,
+                mid_sem_marks: embedMarks(data.mid_sem_marks, 30, 100),
                 end_sem_marks: data.end_sem_marks,
                 attendance_rate: data.attendance_rate,
                 class_participation: data.class_participation,
@@ -345,11 +345,11 @@ export const getGradeAnalysisResult = async () => {
 export const getMarks = (arr) => {
     let result = [];
     for (let i = 0; i < arr['first'].length; i++) {
-        result.push((parseInt(arr['first'][i])
+        result.push([arr["subjects"][i], (parseInt(arr['first'][i])
             + parseInt(arr['second'][i])
             + parseInt(arr['third'][i])
             + parseInt(arr['fourth'][i])
-            + parseInt(arr['fifth'][i])) / 5)
+            + parseInt(arr['fifth'][i])) / 5])
     }
     console.log(result);
     return result;
@@ -378,7 +378,22 @@ export const getOccurance = (arr) => {
     return updatedResult;
 };
 
-export function convertToOutOf(value, outOf) {
-    console.log((value / outOf) * 100);
-    return (value / outOf) * 100;
+
+export const embedMarks = (marks, outof, tooutof) => {
+    const arr = marks.split(',');
+
+    let result = "";
+    for (let i = 0; i < arr.length; i++) {
+        if (i === arr.length - 1) {
+            result += convertToOutOf(arr[i], outof, 100);
+            break;
+        }
+        result += convertToOutOf(arr[i], outof, 100) + ",";
+    }
+    return result;
+}
+
+export function convertToOutOf(value, outOf, tooutof) {
+    console.log(value * (outOf / tooutof));
+    return Math.round(value * (outOf / tooutof));
 }

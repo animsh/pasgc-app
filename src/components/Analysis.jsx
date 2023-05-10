@@ -155,9 +155,9 @@ export default function Analysis() {
             return (
               <div style={{ width: "100%", marginTop: "16px" }}>
                 <Typography variant="body1" >
-                  {subject} out of 70
+                  {subject[0]} {subject[1]} out of 70
                 </Typography>
-                <BorderLinearProgress variant="determinate" value={convertToOutOf(subject, 70)} />
+                <BorderLinearProgress variant="determinate" value={convertToOutOf(subject[1], 70)} />
               </div>
             )
           })}

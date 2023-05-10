@@ -17,7 +17,7 @@ import { scroller } from "react-scroll";
 import { Tabs, Tab } from "@mui/material";
 import { InputLabel, Slider, FormHelperText } from "@mui/material";
 import { MenuItem, Select } from "@mui/material";
-import { getCareerData, getGradeData, sendCareerData, sendGradeData, updateCareerData, updateGradeData } from "../helper";
+import { embedMarks, getCareerData, getGradeData, sendCareerData, sendGradeData, updateCareerData, updateGradeData } from "../helper";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Snackbar, Alert } from '@mui/material';
 
@@ -1041,7 +1041,7 @@ const Profile = () => {
       setGoOut(data.go_out);
       setHealth(data.health);
       setAbsences(data.absences);
-      setMidSemMarks(data.mid_sem_marks);
+      setMidSemMarks(embedMarks(data.mid_sem_marks, 30));
       setAttendanceRate(data.attendance_rate);
       setClassParticipation(data.class_participation);
       setMotivation(data.motivation);

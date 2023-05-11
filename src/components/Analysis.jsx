@@ -7,7 +7,7 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Paper from '@mui/material/Paper';
-import { convertToOutOf, getCareerAnalysisResult, getGradeAnalysisResult, getMarks, getOccurance } from "../helper";
+import { getCareerDetails, getCareerAnalysisResult, getGradeAnalysisResult, getMarks, getOccurance, getRemark } from "../helper";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -52,6 +52,8 @@ export default function Analysis() {
 
   const [subjects, setSubject] = useState([])
 
+  const [careerDetails, setCareerDetails] = useState([])
+
   const options = {
     backgroundColor: '#121212', // set background color
     legendTextStyle: { color: "#FFF" }, // set font color
@@ -75,6 +77,12 @@ export default function Analysis() {
       const careerList = data.data
       const updatedCareerList = getOccurance(careerList);
       setData(updatedCareerList);
+      let details = [];
+      updatedCareerList.slice(1).map((career) => {
+        details.push([career[0], getCareerDetails(career[0])]);
+      })
+      setCareerDetails(details);
+      console.log(details);
     } else {
       console.log("Failed");
     }
@@ -112,7 +120,7 @@ export default function Analysis() {
       >
         <CssBaseline />
         <div style={{ width: "100%" }}>
-          <Typography variant="body1" >
+          <Typography variant="h5" marginBottom={'24px'} >
             Carrer Prediction
           </Typography>
 
@@ -130,15 +138,21 @@ export default function Analysis() {
           />}
 
           {
-            data.slice(1).map((career) => {
+            data.slice(1).map((career, index) => {
               return (
                 <>
-                  <Paper elevation={3} sx={{ p: 2, borderRadius: 4, borderWidth: 2, marginBottom: "16px" }}>
+                  <Paper elevation={3} sx={{ p: 2, borderRadius: 4, borderWidth: 2, marginBottom: "24px" }}>
                     <Typography variant="body1" gutterBottom>
                       {career[0]}
                     </Typography>
-                    <Typography variant="body2" gutterBottom>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus arcu ac mauris vestibulum, vel dignissim libero bibendum. Pellentesque aliquam turpis ut leo dignissim, vel efficitur felis faucibus. Suspendisse eget velit vel velit ultricies aliquam.
+                    <Typography variant="body2" textAlign={'justify'} marginBottom={"16px"} gutterBottom>
+                      Description: <br />{careerDetails[index][1]['description']}
+                    </Typography>
+                    <Typography variant="body2" textAlign={'justify'} marginBottom={"16px"} gutterBottom>
+                      Work: <br />{careerDetails[index][1]['how_it_works']}
+                    </Typography>
+                    <Typography variant="body2" textAlign={'justify'} marginBottom={"16px"} gutterBottom>
+                      How to be one: <br />{careerDetails[index][1]['how_to_become']}
                     </Typography>
                   </Paper>
                 </>
@@ -146,28 +160,35 @@ export default function Analysis() {
             })
           }
         </div>
-        <div style={{ width: "100%" }}>
-          <Typography variant="body1" >
+        <div style={{ width: "100%", marginBottom: "24px" }}>
+          <Typography variant="h5" marginBottom={'24px'} >
             Grade Prediction
           </Typography>
 
           {subjects.length != 0 && subjects.map((subject) => {
             return (
-              <div style={{ width: "100%", marginTop: "16px" }}>
-                <Typography variant="body1" >
+              <Paper elevation={3} sx={{ p: 2, borderRadius: 4, borderWidth: 2, marginBottom: "24px" }}>
+                <Typography variant="body1" marginBottom={'8px'}>
                   {subject[0]} {subject[1]} out of 70
                 </Typography>
                 <BorderLinearProgress variant="determinate" value={(subject[1] / 70) * 100} />
-              </div>
+                <Typography variant="body2" marginTop={'8px'} >
+                  Remark: {getRemark(subject[1])}
+                </Typography>
+              </Paper>
             )
           })}
 
           {subjects.length === 0 && <Typography variant="body2" gutterBottom>
             No data available
           </Typography>}
-
         </div>
 
+        <div style={{ width: "100%" }}>
+          <Typography variant="body1" textAlign={'justify'} >
+            Disclaimer : It should be noted that this project provides predictions based on the available data and questionnaires, but real-life outcomes may vary for individual students. While the project aims to assist students by offering insights into potential future possibilities, the actual results may differ.
+          </Typography>
+        </div>
       </Container>
     </ThemeProvider>
   );

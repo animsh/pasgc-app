@@ -411,7 +411,7 @@ export function convertMarksOutOf30To100(marksOutOf30) {
 }
 
 function convertMarksOutOf100To30(marksOutOf100) {
-    return (marksOutOf100 / 100) * 30;
+    return Math.round((marksOutOf100 / 100) * 30);
 }
 
 export const getCareerDetails = (career) => {

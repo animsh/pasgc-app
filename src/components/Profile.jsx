@@ -966,12 +966,14 @@ const Profile = () => {
       try {
         const response = await updateGradeData(data);
         console.log(response);
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 201) {
           setSeverity('success');
           setMessage('Data updated successfully!');
+          setDataIsAvailable(true);
         } else {
           setMessage('Something went wrong! ' + response.data.detail + ' ' + response.statusText);
           setSeverity('error');
+          setDataIsAvailable(false);
         }
       } catch (error) {
         setSeverity('error');
@@ -984,7 +986,7 @@ const Profile = () => {
       try {
         const response = await sendGradeData(data);
         console.log(response);
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 201) {
           setSeverity('success');
           setMessage('Data saved successfully!');
           setDataIsAvailable(true);
@@ -1426,7 +1428,7 @@ const Profile = () => {
         try {
           const response = await updateCareerData(data);
           console.log(response);
-          if (response.status === 200) {
+          if (response.status === 200 || response.status === 201) {
             setSeverity('success');
             setMessage('Data updated successfully!');
           } else {
@@ -1444,13 +1446,14 @@ const Profile = () => {
         try {
           const response = await sendCareerData(data);
           console.log(response);
-          if (response.status === 201) {
+          if (response.status === 201 || response.status === 200) {
             setSeverity('success');
             setMessage('Data saved successfully!');
             setCareerDataIsAvailable(true);
           } else {
             setMessage('Something went wrong! ' + response.data.detail + ' ' + response.statusText);
             setSeverity('error');
+            setCareerDataIsAvailable(false);
           }
         } catch (error) {
           setSeverity('error');
@@ -2883,10 +2886,10 @@ const Profile = () => {
                 </FormLabel>
                 <Slider
                   id="slider"
-                  defaultValue={0}
                   valueLabelDisplay="auto"
                   step={1}
-                  onChange={publicSpeakingPoints}
+                  defaultValue={publicSpeakingPoints}
+                  onChange={handlePublicSpeakingPointsChange}
                   marks
                   min={1}
                   max={9}
